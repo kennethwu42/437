@@ -1,0 +1,30 @@
+:root {
+  /* Background Colors */
+  --color-background-page: #f9f9f9;
+  --color-background-header: #2c3e50;
+
+  /* Text Colors */
+  --color-text-default: #333333;
+  --color-text-header: #ffffff;
+
+  /* Accent Colors */
+  --color-accent: #0077cc;
+  --color-accent-hover: #005fa3;
+
+  /* Lime Green Header Border */
+  --color-header-border: limegreen;
+
+  /* Optional Styling Tokens */
+  --color-border-light: #dddddd;
+  --color-box-background: #ffffff;
+
+  /* Fonts */
+  --font-family-base: sans-serif;
+
+  /* Spacing */
+  --space-padding: 1rem;
+  --space-margin: 1rem;
+
+  /* Radius */
+  --radius-default: 8px;
+}
