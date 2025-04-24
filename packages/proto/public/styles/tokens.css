@@ -1,30 +1,27 @@
 :root {
-  /* Background Colors */
+  /* Backgrounds */
   --color-background-page: #f9f9f9;
   --color-background-header: #2c3e50;
 
-  /* Text Colors */
-  --color-text-default: #333333;
-  --color-text-header: #ffffff;
+  /* Text */
+  --color-text-default: #333;
+  --color-text-header: #fff;
 
-  /* Accent Colors */
+  /* Accent */
   --color-accent: #0077cc;
   --color-accent-hover: #005fa3;
 
-  /* Lime Green Header Border */
+  /* Borders */
   --color-header-border: limegreen;
-
-  /* Optional Styling Tokens */
-  --color-border-light: #dddddd;
-  --color-box-background: #ffffff;
+  --color-border-light: #ddd;
+  --color-box-background: #fff;
 
   /* Fonts */
-  --font-family-base: sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
 
-  /* Spacing */
+  /* Layout */
   --space-padding: 1rem;
   --space-margin: 1rem;
-
-  /* Radius */
   --radius-default: 8px;
 }
