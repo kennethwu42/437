@@ -17,7 +17,7 @@
   "homepage": "https://github.com/kennethwu42/437#readme",
   "description": ""
   ,
-  "workspaces": {
+  "workspaces": [
       "packages/*"
-  }
+  ]
 }
