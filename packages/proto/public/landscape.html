@@ -10,8 +10,36 @@
   <header>
     <h1>Landscape</h1>
   </header>
+
+  <div style="padding: 1rem;">
+    <label>
+      <input id="darkModeToggle" type="checkbox" autocomplete="off" />
+      Dark mode
+    </label>
+  </div>
+
   <main>
     <p>Types: Ocean, Rolling Hills, Valley Floors, City Views</p>
   </main>
+
+  <script type="module">
+    const label = document.querySelector('label');
+    label.onchange = (event) => {
+      event.stopPropagation();
+      const isDark = event.target.checked;
+      label.dispatchEvent(new CustomEvent("darkmode:toggle", {
+        bubbles: true,
+        detail: { checked: isDark }
+      }));
+    };
+
+    document.body.addEventListener("darkmode:toggle", (event) => {
+      if (event.detail.checked) {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    });
+  </script>
 </body>
 </html>

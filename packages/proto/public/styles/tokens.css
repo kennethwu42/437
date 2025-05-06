@@ -25,3 +25,17 @@
   --space-margin: 1rem;
   --radius-default: 8px;
 }
+
+body.dark-mode {
+  --color-background-page: #062b04;
+  --color-background-header: #1c1c1c;
+
+  --color-text-default: #f4f4f4;
+  --color-text-header: #e6ffe6;
+
+  --color-accent: #00ccff;
+  --color-accent-hover: #0099cc;
+
+  --color-box-background: #111;
+  --color-border-light: #333;
+}
