@@ -35,7 +35,7 @@ export class SiteCampsiteElement extends LitElement {
     .card {
       border: 1px solid var(--border-color, #ddd);
       border-radius: 8px;
-      background-color: var(--background, #fff);
+      background-color: var(--color-box-background, #fff);
       padding: 1rem;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
@@ -63,7 +63,7 @@ export class SiteCampsiteElement extends LitElement {
     .desc {
       font-size: 1rem;
       font-family: var(--body-font, sans-serif);
-      color: var(--text-color, #333);
+      color: var(--color-text-default, #333);
     }
 
     .count {

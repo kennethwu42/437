@@ -99,3 +99,15 @@ svg.icon {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* === Dark Mode Variables === */
+body.dark-mode {
+  --color-background-page: #121212;
+  --color-text-default: #f0f0f0;
+  --color-box-background: #1e1e1e;
+  --color-border-light: #333;
+  --color-background-header: #1b1b1b;
+  --color-text-header: #ffffff;
+  --color-header-border: #4caf50;
+  --color-accent: #90caf9;
+  --color-accent-hover: #1976d2;
+}
