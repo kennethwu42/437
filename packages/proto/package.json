@@ -2,23 +2,22 @@
   "name": "proto",
   "version": "1.0.0",
   "main": "index.html",
-  "type": "module",
   "scripts": {
     "dev": "npx vite",
     "build": "npx tsc && npx vite build",
-    "start": "http-server dist -p 3000",
+    "start": "http-server -p 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
+    "@calpoly/mustang": "^1.0.15",
     "http-server": "^14.1.1",
-    "lit": "^3.1.0",
-    "@calpoly/mustang": "^0.12.2"
+    "lit": "^3.3.0"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "typescript": "^5.2.2"
-  },
-  "description": "",
-  "author": "",
-  "license": "ISC"
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
 }
