@@ -1,15 +1,24 @@
 {
   "name": "proto",
   "version": "1.0.0",
-  "main": "public/index.html",
+  "main": "index.html",
+  "type": "module",
   "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
     "start": "http-server dist -p 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "http-server": "^14.1.1"
-  }
+    "http-server": "^14.1.1",
+    "lit": "^3.1.0",
+    "@calpoly/mustang": "^0.12.2"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "typescript": "^5.2.2"
+  },
+  "description": "",
+  "author": "",
+  "license": "ISC"
 }
