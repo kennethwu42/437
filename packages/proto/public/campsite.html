@@ -27,60 +27,72 @@
       </a>
 
       <main>
-        <section>
-          <h2 class="comic">
+        <site-campsite name="Oceano County Campground" count="24">
+          <span slot="icon">
             <svg class="icon">
               <use href="/icons/icons.svg#campsites" />
             </svg>
-            Oceano County Campground
-          </h2>
-          <p>Located along the coast, Oceano offers beach access and sand dune adventures.</p>
-        </section>
+          </span>
+          <p slot="desc">
+            Located along the coast, Oceano offers beach access and sand dune adventures.
+          </p>
+        </site-campsite>
 
-        <section>
-          <h2 class="comic">
+        <site-campsite name="Coastal Dunes RV Park and Campground" count="230">
+          <span slot="icon">
             <svg class="icon">
               <use href="/icons/icons.svg#campsites" />
             </svg>
-            Coastal Dunes RV Park and Campground
-          </h2>
-          <p>A popular RV-friendly spot with coastal breezes and walking access to dunes.</p>
-        </section>
+          </span>
+          <p slot="desc">
+            A popular RV-friendly spot with coastal breezes and walking access to dunes.
+          </p>
+        </site-campsite>
 
-        <section>
-          <h2 class="comic">
+        <site-campsite name="El Chorro Regional Park & Campground" count="61">
+          <span slot="icon">
             <svg class="icon">
               <use href="/icons/icons.svg#campsites" />
             </svg>
-            El Chorro Regional Park & Campground
-          </h2>
-          <p>Known for hiking trails, botanical gardens, and proximity to Cuesta Grade.</p>
-        </section>
+          </span>
+          <p slot="desc">
+            Known for hiking trails, botanical gardens, and proximity to Cuesta Grade.
+          </p>
+        </site-campsite>
 
-        <section>
-          <h2 class="comic">
+        <site-campsite name="Lopez Lake" count="350">
+          <span slot="icon">
             <svg class="icon">
               <use href="/icons/icons.svg#campsites" />
             </svg>
-            Lopez Lake
-          </h2>
-          <p>Great for water activities and family camping near a scenic reservoir.</p>
-        </section>
+          </span>
+          <p slot="desc">
+            Great for water activities and family camping near a scenic reservoir.
+          </p>
+        </site-campsite>
 
-        <section>
-          <h2 class="comic">
+        <site-campsite name="Santa Margarita Lake" count="60">
+          <span slot="icon">
             <svg class="icon">
               <use href="/icons/icons.svg#campsites" />
             </svg>
-            Santa Margarita Lake
-          </h2>
-          <p>Serene, wooded setting ideal for kayaking, wildlife viewing, and secluded camping.</p>
-        </section>
+          </span>
+          <p slot="desc">
+            Serene, wooded setting ideal for kayaking, wildlife viewing, and secluded camping.
+          </p>
+        </site-campsite>
       </main>
     </div>
 
     <script type="module">
-      const label = document.querySelector('label');
+      import { define } from "@calpoly/mustang";
+      import { SiteCampsiteElement } from "/src/site-campsite.js";
+
+      define({
+        "site-campsite": SiteCampsiteElement
+      });
+
+      const label = document.querySelector("label");
       label.onchange = (event) => {
         event.stopPropagation();
         const isDark = event.target.checked;

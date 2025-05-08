@@ -4,13 +4,23 @@ import reset from "./styles/reset.css.ts";
 
 export class SiteCampsiteElement extends LitElement {
   @property() name?: string;
+  @property({ type: Number }) count?: number;
 
   override render() {
+    let countDisplay = null;
+
+    if (this.count != null) {
+      countDisplay = html`<p class="count">${Number(this.count)} campsites</p>`;
+    }
+
     return html`
       <section class="card">
         <div class="header">
           <slot name="icon"></slot>
-          <h2>${this.name}</h2>
+          <div>
+            <h2>${this.name}</h2>
+            ${countDisplay}
+          </div>
         </div>
         <div class="desc">
           <slot name="desc"></slot>
@@ -38,7 +48,7 @@ export class SiteCampsiteElement extends LitElement {
       .header {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
         margin-bottom: 0.5rem;
       }
 
@@ -59,6 +69,13 @@ export class SiteCampsiteElement extends LitElement {
         font-size: 1rem;
         font-family: var(--body-font, sans-serif);
         color: var(--text-color, #333);
+      }
+
+      .count {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-muted, #666);
+        margin-top: 0.15rem;
       }
     `
   ];
