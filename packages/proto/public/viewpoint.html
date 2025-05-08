@@ -1,47 +1,123 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Viewpoint</title>
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/page.css" />
-</head>
-<body>
-  <header>
-    <h1>Viewpoint</h1>
-  </header>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Viewpoint</title>
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>Viewpoint</h1>
+    </header>
 
-  <div style="padding: 1rem;">
-    <label>
-      <input id="darkModeToggle" type="checkbox" autocomplete="off" />
-      Dark mode
-    </label>
-  </div>
+    <div class="page-wrapper">
+      <div style="padding: 1rem;">
+        <label>
+          <input id="darkModeToggle" type="checkbox" autocomplete="off" />
+          Dark mode
+        </label>
+      </div>
 
-  <main>
-    <p>Name: Sunrise Vista</p>
-    <p>Located at the top of: Ridge View Trail</p>
-    <p>Overlooks: Ocean, Valleys, Cityscape</p>
-  </main>
+      <main>
+        <section>
+          <h2 class="comic">Prefumo Canyon</h2>
+          <p>Offers gorgeous vistas accessible via turnouts along the road, featuring breathtaking rolling hills and perfect spots for sunsets.</p>
+        </section>
 
-  <script type="module">
-    const label = document.querySelector('label');
-    label.onchange = (event) => {
-      event.stopPropagation();
-      const isDark = event.target.checked;
-      label.dispatchEvent(new CustomEvent("darkmode:toggle", {
-        bubbles: true,
-        detail: { checked: isDark }
-      }));
-    };
+        <section>
+          <h2 class="comic">Serenity Swing</h2>
+          <p>Located in Poly Canyon Design Village, this swing provides expansive and unique views after a 2.5-mile hike.</p>
+        </section>
 
-    document.body.addEventListener("darkmode:toggle", (event) => {
-      if (event.detail.checked) {
-        document.body.classList.add("dark-mode");
-      } else {
-        document.body.classList.remove("dark-mode");
-      }
-    });
-  </script>
-</body>
+        <section>
+          <h2 class="comic">Hearst Castle</h2>
+          <p>Situated south of Big Sur, offering guided tours with jaw-dropping views of the Central Coast.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Cerro San Luis</h2>
+          <p>Also known as Madonna Mountain, this moderate hike provides 360-degree views of San Luis Obispo from the summit.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Pirate’s Cove</h2>
+          <p>A local favorite offering epic views from the road or beach, including a sea cave and pristine coastline vistas.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Terrace Hill</h2>
+          <p>A short hike within city limits leading to a plateau with scenic city views, perfect for relaxation.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Islay Hill</h2>
+          <p>A 1.8-mile round-trip hike offering sweeping views of the Santa Lucia Mountains and Edna Valley.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Cuesta Ridge Botanical Area</h2>
+          <p>Starts from the top of Cuesta Grade, providing panoramic views early in the hike, including sights of eight of the Nine Sisters.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Point San Luis Lighthouse</h2>
+          <p>Historic lighthouse nestled on the Pacific Ocean's edge, offering docent-led tours with stunning ocean views.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Bell Tower</h2>
+          <p>A rigorous hike less than a mile to the top, rewarding with views of Cerro San Luis and a prominent bell tower.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Montaña de Oro</h2>
+          <p>Popular destination with stunning views, expansive dunes, and the Bluff Trail offering coastal vistas.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Valencia Peak</h2>
+          <p>One of the tallest mountains in Montaña de Oro, providing a 3.7-mile round-trip hike with 360-degree views at the summit.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Cerro Alto</h2>
+          <p>At 2,624 feet, it's one of the highest peaks in SLO County, offering panoramic views of the entire Central Coast.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Ontario Ridge Trail</h2>
+          <p>Known as “Shell Beach Ridge,” this trail runs between Shell Beach and Avila Beach, offering epic ocean views.</p>
+        </section>
+
+        <section>
+          <h2 class="comic">Broderson Peak Trail</h2>
+          <p>Located within the Morro Dunes Ecological Reserve, this 2.5-mile hike includes a swing overlooking Morro Rock and the bay.</p>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      const label = document.querySelector('label');
+      label.onchange = (event) => {
+        event.stopPropagation();
+        const isDark = event.target.checked;
+        label.dispatchEvent(new CustomEvent("darkmode:toggle", {
+          bubbles: true,
+          detail: { checked: isDark }
+        }));
+      };
+
+      document.body.addEventListener("darkmode:toggle", (event) => {
+        if (event.detail.checked) {
+          document.body.classList.add("dark-mode");
+        } else {
+          document.body.classList.remove("dark-mode");
+        }
+      });
+    </script>
+  </body>
 </html>
