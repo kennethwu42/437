@@ -9,7 +9,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        campsite: resolve(__dirname, 'campsite.html')  
+        campsite: resolve(__dirname, 'campsite.html'),
+        activities: resolve(__dirname, 'activities.html')
       }
     }
   }

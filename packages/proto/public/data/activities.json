@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Mission San Luis Obispo de Tolosa",
+    "desc": "A historic Spanish mission offering tours, gardens, and cultural exhibits."
+  },
+  {
+    "name": "Madonna Inn",
+    "desc": "A famous inn with uniquely themed rooms and pink decor."
+  },
+  {
+    "name": "San Luis Obispo Children's Museum",
+    "desc": "Interactive exhibits for kids, encouraging learning through play."
+  },
+  {
+    "name": "Sunset Drive-In",
+    "desc": "A classic drive-in theater showing double features nightly."
+  },
+  {
+    "name": "Bishop Peak",
+    "desc": "Popular hiking trail with panoramic views of San Luis Obispo."
+  },
+  {
+    "name": "Avila Valley Barn",
+    "desc": "A charming farm stand with produce, animals, and baked goods."
+  },
+  {
+    "name": "Fremont Theater",
+    "desc": "An art deco movie theater hosting film screenings and events."
+  },
+  {
+    "name": "Performing Arts Center San Luis Obispo",
+    "desc": "Venue for concerts, performances, and community events."
+  }
+]
