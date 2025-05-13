@@ -3,7 +3,7 @@ import { property, state } from "lit/decorators.js";
 
 export class SiteCampsitesElement extends LitElement {
   @property() src = "";
-  @state() campsites: Array<{ name: string; count: number; description: string }> = [];
+  @state() campsites: Array<{ name: string; count: number; desc: string }> = [];
 
   override connectedCallback() {
     super.connectedCallback();
@@ -31,7 +31,7 @@ export class SiteCampsitesElement extends LitElement {
             <svg slot="icon" class="icon">
               <use href="/icons/icons.svg#campsites"></use>
             </svg>
-            <p slot="desc">${camp.description}</p>
+            <p slot="desc">${camp.desc}</p>
           </site-campsite>
         `
       )}
