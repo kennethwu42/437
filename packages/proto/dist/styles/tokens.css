@@ -1,0 +1,41 @@
+:root {
+  /* Backgrounds */
+  --color-background-page: #f9f9f9;
+  --color-background-header: #2c3e50;
+
+  /* Text */
+  --color-text-default: #333;
+  --color-text-header: #fff;
+
+  /* Accent */
+  --color-accent: #0077cc;
+  --color-accent-hover: #005fa3;
+
+  /* Borders */
+  --color-header-border: limegreen;
+  --color-border-light: #ddd;
+  --color-box-background: #fff;
+
+  /* Fonts */
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+
+  /* Layout */
+  --space-padding: 1rem;
+  --space-margin: 1rem;
+  --radius-default: 8px;
+}
+
+body.dark-mode {
+  --color-background-page: #062b04;
+  --color-background-header: #1c1c1c;
+
+  --color-text-default: #f4f4f4;
+  --color-text-header: #e6ffe6;
+
+  --color-accent: #00ccff;
+  --color-accent-hover: #0099cc;
+
+  --color-box-background: #111;
+  --color-border-light: #333;
+}
