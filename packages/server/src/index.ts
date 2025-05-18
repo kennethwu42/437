@@ -17,10 +17,9 @@ app.get("/hello", (_req: Request, res: Response) => {
   res.send("Hello, World");
 });
 
-// ✅ Use REST routers
 app.use("/api/campsites", campsiteRoutes);
 app.use("/api/activities", activityRoutes);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
 });
