@@ -22,7 +22,7 @@ export class SiteActivitiesElement extends LitElement {
   override render() {
     if (this.activities.length === 0) {
       return html`<p>Loading activities...</p>`;
-    }
+    } 
 
     return html`
       ${this.activities.map(
