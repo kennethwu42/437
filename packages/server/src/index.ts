@@ -5,11 +5,12 @@ import activityRoutes from "./routes/activities";
 import authRouter, { authenticateUser } from "./routes/auth";
 
   
-connect("SLO Activities");
+connect("SLO_Activities");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const staticDir = process.env.STATIC || "public";
+const staticDir = process.env.STATIC || "../proto";
+
 
 app.use(express.static(staticDir));
 app.use(express.json());

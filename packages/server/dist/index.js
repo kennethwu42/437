@@ -26,10 +26,10 @@ var import_mongo = require("./services/mongo");
 var import_campsites = __toESM(require("./routes/campsites"));
 var import_activities = __toESM(require("./routes/activities"));
 var import_auth = __toESM(require("./routes/auth"));
-(0, import_mongo.connect)("SLO Activities");
+(0, import_mongo.connect)("SLO_Activities");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
-const staticDir = process.env.STATIC || "public";
+const staticDir = process.env.STATIC || "../proto";
 app.use(import_express.default.static(staticDir));
 app.use(import_express.default.json());
 app.get("/hello", (_req, res) => {
