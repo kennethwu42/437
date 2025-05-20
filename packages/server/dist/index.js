@@ -21,16 +21,23 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
-var import_mongo = require("./services/mongo");
 var import_express = __toESM(require("express"));
+var import_mongo = require("./services/mongo");
+var import_campsites = __toESM(require("./routes/campsites"));
+var import_activities = __toESM(require("./routes/activities"));
+var import_auth = __toESM(require("./routes/auth"));
 (0, import_mongo.connect)("SLO Activities");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
 app.use(import_express.default.static(staticDir));
-app.get("/hello", (req, res) => {
+app.use(import_express.default.json());
+app.get("/hello", (_req, res) => {
   res.send("Hello, World");
 });
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.use("/api/campsites", import_auth.authenticateUser, import_campsites.default);
+app.use("/api/activities", import_auth.authenticateUser, import_activities.default);
+app.use("/auth", import_auth.default);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
 });

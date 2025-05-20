@@ -2,7 +2,9 @@ import express, { Request, Response } from "express";
 import { connect } from "./services/mongo";
 import campsiteRoutes from "./routes/campsites";
 import activityRoutes from "./routes/activities";
+import authRouter, { authenticateUser } from "./routes/auth";
 
+  
 connect("SLO Activities");
 
 const app = express();
@@ -17,8 +19,10 @@ app.get("/hello", (_req: Request, res: Response) => {
   res.send("Hello, World");
 });
 
-app.use("/api/campsites", campsiteRoutes);
-app.use("/api/activities", activityRoutes);
+app.use("/api/campsites", authenticateUser, campsiteRoutes);
+app.use("/api/activities", authenticateUser, activityRoutes);
+
+app.use("/auth", authRouter);
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on port ${port}`);
