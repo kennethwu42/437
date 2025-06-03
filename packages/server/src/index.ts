@@ -4,6 +4,8 @@ import { connect } from "./services/mongo";
 import campsiteRoutes from "./routes/campsites";
 import activityRoutes from "./routes/activities";
 import authRouter, { authenticateUser } from "./routes/auth";
+import fs from "node:fs/promises";
+import path from "path";
 
 dotenv.config();
 connect("SLO_Activities");
@@ -33,6 +35,20 @@ app.get("/hello", (_req: Request, res: Response) => {
 
 // ✅ Serve static frontend files
 app.use(express.static(staticDir));
+
+// SPA Routes: /app/...
+app.use("/app", (req: Request, res: Response) => {
+  const indexHtml = path.resolve(staticDir, "index.html");
+  fs.readFile(indexHtml, { encoding: "utf8" }).then((html) =>
+    res.send(html)
+  );
+});
+
+// ✅ NEW: Redirect / to /app so users don't see 404
+app.get("/", (_req, res) => {
+  res.redirect("/app");
+});
+
 
 // ✅ Start server
 app.listen(port, "0.0.0.0", () => {

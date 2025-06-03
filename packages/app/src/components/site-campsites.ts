@@ -1,6 +1,5 @@
 import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
-//import "./site-campsite";
 
 export class SiteCampsitesElement extends LitElement {
   @property() src = "";
@@ -52,4 +51,4 @@ export class SiteCampsitesElement extends LitElement {
   `;
 }
 
-//customElements.define("site-campsites", SiteCampsitesElement);
+customElements.define("site-campsites", SiteCampsitesElement);

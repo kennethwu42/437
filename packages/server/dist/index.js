@@ -27,6 +27,8 @@ var import_mongo = require("./services/mongo");
 var import_campsites = __toESM(require("./routes/campsites"));
 var import_activities = __toESM(require("./routes/activities"));
 var import_auth = __toESM(require("./routes/auth"));
+var import_promises = __toESM(require("node:fs/promises"));
+var import_path = __toESM(require("path"));
 import_dotenv.default.config();
 (0, import_mongo.connect)("SLO_Activities");
 const app = (0, import_express.default)();
@@ -44,6 +46,15 @@ app.get("/hello", (_req, res) => {
   res.send("Hello, World");
 });
 app.use(import_express.default.static(staticDir));
+app.use("/app", (req, res) => {
+  const indexHtml = import_path.default.resolve(staticDir, "index.html");
+  import_promises.default.readFile(indexHtml, { encoding: "utf8" }).then(
+    (html) => res.send(html)
+  );
+});
+app.get("/", (_req, res) => {
+  res.redirect("/app");
+});
 app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on http://localhost:${port}`);
 });

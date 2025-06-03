@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Oceano County Campground",
+    "desc": "Located along the coast, Oceano offers beach access and sand dune adventures.",
+    "count": 24
+  },
+  {
+    "name": "Coastal Dunes RV Park and Campground",
+    "desc": "A popular RV-friendly spot with coastal breezes and walking access to dunes.",
+    "count": 230
+  },
+  {
+    "name": "El Chorro Regional Park & Campground",
+    "desc": "Known for hiking trails, botanical gardens, and proximity to Cuesta Grade.",
+    "count": 61
+  },
+  {
+    "name": "Lopez Lake",
+    "desc": "Great for water activities and family camping near a scenic reservoir.",
+    "count": 350
+  },
+  {
+    "name": "Santa Margarita Lake",
+    "desc": "Serene, wooded setting ideal for kayaking, wildlife viewing, and secluded camping.",
+    "count": 60
+  }
+]
