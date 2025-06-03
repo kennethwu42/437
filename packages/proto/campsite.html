@@ -51,26 +51,27 @@
       </main>
     </div>
 
+    <!-- Persistent dark mode script -->
     <script type="module">
-      const label = document.querySelector("label");
-      label.onchange = (event) => {
-        event.stopPropagation();
-        const isDark = event.target.checked;
-        label.dispatchEvent(
-          new CustomEvent("darkmode:toggle", {
-            bubbles: true,
-            detail: { checked: isDark },
-          })
-        );
-      };
+      const toggle = document.querySelector("#darkModeToggle");
 
-      document.body.addEventListener("darkmode:toggle", (event) => {
-        if (event.detail.checked) {
+      // Restore saved preference
+      const saved = localStorage.getItem("dark-mode");
+      if (saved === "true") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+
+      // Toggle and save preference
+      toggle.onchange = (event) => {
+        const isDark = event.target.checked;
+        localStorage.setItem("dark-mode", isDark);
+        if (isDark) {
           document.body.classList.add("dark-mode");
         } else {
           document.body.classList.remove("dark-mode");
         }
-      });
+      };
     </script>
   </body>
 </html>

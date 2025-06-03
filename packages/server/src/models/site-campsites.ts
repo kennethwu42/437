@@ -44,8 +44,8 @@ export class SiteCampsitesElement extends LitElement {
     }
 
     .icon {
-      width: 24px;
-      height: 24px;
+      width: 50px;
+      height: 50px;
       fill: currentColor;
     }
   `;

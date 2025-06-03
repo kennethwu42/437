@@ -54,10 +54,11 @@ export class SiteCampsiteElement extends LitElement {
     }
 
     .icon {
-      width: 24px;
-      height: 24px;
+      width: 50px;
+      height: 50px;
       fill: currentColor;
       flex-shrink: 0;
+      font-size: 1.5rem; /* Add this line for emoji or text-based icons */
     }
 
     .desc {

@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";import{d as o,a as r}from"./mustang-DqjmVxM7.js";import{L as a}from"./login-form-DaPY7uF4.js";import"./state-BvXKpwmJ.js";o({"mu-auth":r.Provider,"login-form":a});document.addEventListener("auth:message",t=>{const[e,{redirect:i}]=t.detail;e==="auth/signin"&&(window.location.href=i||"/")});

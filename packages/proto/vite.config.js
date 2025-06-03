@@ -10,6 +10,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         campsite: resolve(__dirname, 'campsite.html'),
+        login: resolve(__dirname, "login.html"),
+        newuser: resolve(__dirname, "newuser.html"),
         activities: resolve(__dirname, 'activities.html')
       }
     }

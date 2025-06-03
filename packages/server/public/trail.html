@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Trail</title>
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>Trail</h1>
+    </header>
+
+    <div style="padding: 1rem;">
+      <label>
+        <input id="darkModeToggle" type="checkbox" autocomplete="off" />
+        Dark mode
+      </label>
+    </div>
+
+    <div class="page-wrapper">
+      <a href="/" style="display: inline-block; margin: 1rem 0; padding: 0.5rem 1rem; background-color: var(--color-accent); color: white; text-decoration: none; border-radius: 6px;">
+        ← Back to Home
+      </a>
+
+      <main>
+        <section><h2 class="comic">#1 – Bishop Peak Trail from Patricia Drive</h2></section>
+        <section><h2 class="comic">#2 – Bishop Peak Trail from Highland Drive Trailhead</h2></section>
+        <section><h2 class="comic">#3 – Cerro San Luis Obispo Trail</h2></section>
+        <section><h2 class="comic">#4 – Reservoir Canyon Loop</h2></section>
+        <section><h2 class="comic">#5 – Felsman Loop Trail</h2></section>
+        <section><h2 class="comic">#6 – Lemon Grove and Rock Garden Loop</h2></section>
+        <section><h2 class="comic">#7 – M Trail Loop</h2></section>
+        <section><h2 class="comic">#8 – Froom Canyon – Irish Hills Preserve</h2></section>
+        <section><h2 class="comic">#9 – Serenity Swing</h2></section>
+        <section><h2 class="comic">#10 – Poly Canyon Loop Trail</h2></section>
+      </main>
+    </div>
+
+    <script type="module">
+      const toggle = document.querySelector("#darkModeToggle");
+      const saved = localStorage.getItem("dark-mode");
+      if (saved === "true") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+
+      toggle.onchange = (event) => {
+        const isDark = event.target.checked;
+        localStorage.setItem("dark-mode", isDark);
+        document.body.classList.toggle("dark-mode", isDark);
+      };
+    </script>
+  </body>
+</html>

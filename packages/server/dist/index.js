@@ -22,22 +22,28 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
+var import_dotenv = __toESM(require("dotenv"));
 var import_mongo = require("./services/mongo");
 var import_campsites = __toESM(require("./routes/campsites"));
 var import_activities = __toESM(require("./routes/activities"));
 var import_auth = __toESM(require("./routes/auth"));
+import_dotenv.default.config();
 (0, import_mongo.connect)("SLO_Activities");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "../proto";
-app.use(import_express.default.static(staticDir));
 app.use(import_express.default.json());
+app.use(import_express.default.urlencoded({ extended: true }));
+app.use("/auth", (req, res, next) => {
+  console.log(`[AUTH] ${req.method} ${req.url}`, req.body);
+  next();
+}, import_auth.default);
+app.use("/api/campsites", import_auth.authenticateUser, import_campsites.default);
+app.use("/api/activities", import_auth.authenticateUser, import_activities.default);
 app.get("/hello", (_req, res) => {
   res.send("Hello, World");
 });
-app.use("/api/campsites", import_auth.authenticateUser, import_campsites.default);
-app.use("/api/activities", import_auth.authenticateUser, import_activities.default);
-app.use("/auth", import_auth.default);
+app.use(import_express.default.static(staticDir));
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });

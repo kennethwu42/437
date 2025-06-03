@@ -1,0 +1,46 @@
+/* Reset all default browser margins and use border-box sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set a comfortable default line height for all text */
+body {
+  line-height: 1.5;
+}
+
+/* Images should never overflow their containers */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Remove list styles */
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Remove default button, input, select styles */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Reset anchor styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}

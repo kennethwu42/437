@@ -33,7 +33,9 @@ export class LoginFormElement extends LitElement {
       >
         <slot></slot>
         <slot name="button">
-          <button ?disabled=${!this.canSubmit} type="submit">Login</button>
+          <button ?disabled=${!this.canSubmit} type="submit">
+          <slot name="button-label">Login</slot>
+        </button>
         </slot>
         <p class="error">${this.error}</p>
       </form>
@@ -42,7 +44,7 @@ export class LoginFormElement extends LitElement {
 
   static styles = [
     reset.styles,
-    headings.styles,
+    headings,
     css`
       .error:not(:empty) {
         color: var(--color-error);
@@ -80,7 +82,7 @@ export class LoginFormElement extends LitElement {
         body: JSON.stringify(this.formData)
       })
         .then((res) => {
-          if (res.status !== 200) throw "Login failed";
+          if (res.status !== 200 && res.status !== 201) throw "Login failed";
           return res.json();
         })
         .then((json: object) => {

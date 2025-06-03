@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Landscape</title>
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/page.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header>
+    <h1>Landscape</h1>
+  </header>
+
+  <div style="padding: 1rem;">
+    <label>
+      <input id="darkModeToggle" type="checkbox" autocomplete="off" />
+      Dark mode
+    </label>
+  </div>
+
+  <main>
+    <p>Types: Ocean, Rolling Hills, Valley Floors, City Views</p>
+  </main>
+
+  <!-- Persistent dark mode script -->
+  <script type="module">
+    const toggle = document.querySelector("#darkModeToggle");
+
+    // Restore saved preference
+    const saved = localStorage.getItem("dark-mode");
+    if (saved === "true") {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    }
+
+    // Toggle and save preference
+    toggle.onchange = (event) => {
+      const isDark = event.target.checked;
+      localStorage.setItem("dark-mode", isDark);
+      if (isDark) {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    };
+  </script>
+</body>
+</html>

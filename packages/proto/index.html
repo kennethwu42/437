@@ -19,27 +19,34 @@
   </head>
 
   <body>
-    <!-- ✅ Wrap entire page in mu-auth -->
     <mu-auth provides="camping:auth">
-      <!-- ✅ Custom header with login/logout controls -->
-      <blz-header>
-        Camping and Hiking
-        <a href="/activities.html">Activities</a>
-        <a href="/campsite.html">Campsites</a>
-        <a href="/trail.html">Trails</a>
-        <a href="/viewpoint.html">Viewpoints</a>
-      </blz-header>
+      <header
+        style="
+          background-color: #263646;
+          color: white;
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          border-radius: 0.5rem;
+          margin-bottom: 1rem;
+          gap: 0.5rem;
+        "
+      >
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 0;">
+          Camping and Hiking
+        </h1>
+        <p style="margin: 0; font-size: 1rem;">
+          Explore outdoor adventures in the San Luis Obispo area:
+        </p>
+        <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">
+          <input id="darkModeToggle" type="checkbox" autocomplete="off" />
+          Dark mode
+        </label>
+      </header>
 
       <div class="page-wrapper">
         <main>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <p>Explore outdoor adventures in the San Luis Obispo area:</p>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
-              <input id="darkModeToggle" type="checkbox" autocomplete="off" />
-              Dark mode
-            </label>
-          </div>
-
           <img
             src="/images/mountainslo.webp"
             alt="Scenic San Luis Obispo Mountains"
@@ -56,38 +63,36 @@
       </div>
     </mu-auth>
 
-    <!-- ✅ Define Mustang components -->
+    <!-- Mustang component registration -->
     <script type="module">
-      import { define, Auth, Events } from "@calpoly/mustang";
-      import { HeaderElement } from "/scripts/header.js";
+      import { define, Auth } from "@calpoly/mustang";
 
       define({
-        "mu-auth": Auth.Provider,
-        "blz-header": HeaderElement
+        "mu-auth": Auth.Provider
       });
-
-      HeaderElement.initializeOnce();
     </script>
 
-    <!-- Dark mode script -->
+    <!-- Persistent Dark Mode Script -->
     <script type="module">
-      const label = document.querySelector('label');
-      label.onchange = (event) => {
-        event.stopPropagation();
-        const isDark = event.target.checked;
-        label.dispatchEvent(new CustomEvent("darkmode:toggle", {
-          bubbles: true,
-          detail: { checked: isDark }
-        }));
-      };
+      const toggle = document.querySelector("#darkModeToggle");
 
-      document.body.addEventListener("darkmode:toggle", (event) => {
-        if (event.detail.checked) {
+      // Restore saved preference
+      const saved = localStorage.getItem("dark-mode");
+      if (saved === "true") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+
+      // Toggle and save preference
+      toggle.onchange = (event) => {
+        const isDark = event.target.checked;
+        localStorage.setItem("dark-mode", isDark);
+        if (isDark) {
           document.body.classList.add("dark-mode");
         } else {
           document.body.classList.remove("dark-mode");
         }
-      });
+      };
     </script>
   </body>
 </html>
