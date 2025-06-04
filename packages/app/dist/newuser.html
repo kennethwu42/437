@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Create New User</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .card {
+      background-color: #e0f2fe;
+      padding: 2rem 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      color: #1e3a8a;
+    }
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+    }
+    input {
+      padding: 0.5rem;
+      border: 1px solid #93c5fd;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem;
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:disabled {
+      background-color: #93c5fd;
+      cursor: not-allowed;
+    }
+    p {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    a {
+      color: #1e40af;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <script type="module" crossorigin src="/assets/newuser-CsR6eUug.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/state-CWq57S3t.js">
+  <link rel="modulepreload" crossorigin href="/assets/login-form-DmhaWWev.js">
+</head>
+<body class="page">
+  <mu-auth>
+    <main class="card">
+      <h2>Create New User</h2>
+      <login-form api="/auth/register">
+        <label>
+          <span>Username:</span>
+          <input name="username" autocomplete="off" />
+        </label>
+        <label>
+          <span>Password:</span>
+          <input type="password" name="password" />
+        </label>
+        <span slot="button-label">Create Account</span>
+      </login-form>
+      <p>
+        Already have an account?
+        <a href="login.html">Sign in instead</a>
+      </p>
+    </main>
+  </mu-auth>
+</body>
+</html>

@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <script type="module" crossorigin src="/assets/login-CtTUWA5w.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/assets/mustang-DqjmVxM7.js">
-  <link rel="modulepreload" crossorigin href="/assets/state-BvXKpwmJ.js">
-  <link rel="modulepreload" crossorigin href="/assets/login-form-NC_jd46G.js">
+  <script type="module">
+    import { define, Auth } from "@calpoly/mustang";
+    import { LoginFormElement } from "/src/auth/login-form";
+
+    define({
+      "mu-auth": Auth.Provider,
+      "login-form": LoginFormElement
+    });
+  </script>
 </head>
 <body class="page">
   <mu-auth>

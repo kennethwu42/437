@@ -15,6 +15,7 @@ import { CampsitesViewElement } from "./views/campsites-view";
 import { ActivitiesViewElement } from "./views/activities-view";
 import {SiteCampsitesElement} from "./components/site-campsites";
 import {SiteCampsiteElement} from "./components/site-campsite";
+import {SiteActivitiesElement} from "./components/site-activities";
 const routes = [
   {
     path: "/app/campsites",
@@ -47,5 +48,6 @@ define({
   "campsites-view": CampsitesViewElement,
   "activities-view": ActivitiesViewElement,
   "site-campsites": SiteCampsitesElement,
-  "site-campsite": SiteCampsiteElement
+  "site-campsite": SiteCampsiteElement,
+  "site-activities": SiteActivitiesElement
 });
