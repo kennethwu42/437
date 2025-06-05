@@ -1,7 +1,7 @@
-import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h as C}from"./state-BJBJ081d.js";const F={};console.log("🛠 update.ts loaded");function T(s,e,t){if(console.log("🛠 Message received in update:",s),e(r=>({...r,user:t})),s[0]==="campsites/init"){console.log("🌱 campsites/init received — fetching data"),fetch("/api/campsites",{headers:$.headers(t)}).then(r=>r.json()).then(r=>{console.log("📦 campsites fetched — applying to model:",r),e(i=>({...i,campsites:r}))}).catch(r=>{console.error("❌ Failed to fetch campsites:",r)});return}switch(s[0]){case"campsites/load":console.log("✅ Applying campsites to model:",s[1].campsites),e(r=>({...r,campsites:s[1].campsites}));break;case"activities/load":console.log("✅ Applying activities to model:",s[1].activities),e(r=>({...r,activities:s[1].activities}));break;default:throw new Error(`Unhandled message type: ${s[0]}`)}}const w=class w extends p{constructor(){super(...arguments),this.isMainPage=!1}firstUpdated(){const e=this.renderRoot.querySelector("#darkModeToggle");localStorage.getItem("dark-mode")==="true"&&(document.body.classList.add("dark-mode"),e&&(e.checked=!0)),e==null||e.addEventListener("change",r=>{const i=r.target.checked;localStorage.setItem("dark-mode",String(i)),document.body.classList.toggle("dark-mode",i)}),this.isMainPage=window.location.pathname==="/app",this.requestUpdate()}render(){return a`
+import{a as w,i as h,b as v,x as o,r as l,V as R,n as p,d as _,_ as O,s as C,h as z}from"./state-BJBJ081d.js";const F={};console.log("🛠 update.ts loaded");function j(r,e,t){if(console.log("🛠 Message received in update:",r),e(s=>({...s,user:t})),r[0]==="campsites/init"){console.log("🌱 campsites/init received — fetching data"),fetch("/api/campsites",{headers:w.headers(t)}).then(s=>s.json()).then(s=>{console.log("📦 campsites fetched — applying to model:",s),e(i=>({...i,campsites:s}))}).catch(s=>{console.error("❌ Failed to fetch campsites:",s)});return}if(r[0]==="activities/init"){console.log("🌱 activities/init received — fetching data"),fetch("/api/activities",{headers:w.headers(t)}).then(s=>s.json()).then(s=>{console.log("📦 activities fetched — applying to model:",s),e(i=>({...i,activities:s}))}).catch(s=>{console.error("❌ Failed to fetch activities:",s)});return}switch(r[0]){case"campsites/load":console.log("✅ Applying campsites to model:",r[1].campsites),e(s=>({...s,campsites:r[1].campsites}));break;case"activities/load":console.log("✅ Applying activities to model:",r[1].activities),e(s=>({...s,activities:r[1].activities}));break;default:throw new Error(`Unhandled message type: ${r[0]}`)}}const b=class b extends h{constructor(){super(...arguments),this.isMainPage=!1}firstUpdated(){const e=this.renderRoot.querySelector("#darkModeToggle");localStorage.getItem("dark-mode")==="true"&&(document.body.classList.add("dark-mode"),e&&(e.checked=!0)),e==null||e.addEventListener("change",s=>{const i=s.target.checked;localStorage.setItem("dark-mode",String(i)),document.body.classList.toggle("dark-mode",i)}),this.isMainPage=window.location.pathname==="/app",this.requestUpdate()}render(){return o`
       <header>
         <div class="page-wrapper">
-          ${this.isMainPage?null:a`<button class="back-button" @click=${()=>history.back()}>← Back</button>`}
+          ${this.isMainPage?null:o`<button class="back-button" @click=${()=>history.back()}>← Back</button>`}
           <h1>Camping and Hiking</h1>
           <p>Explore outdoor adventures in the San Luis Obispo area:</p>
           <label>
@@ -10,7 +10,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
           </label>
         </div>
       </header>
-    `}};w.styles=u`
+    `}};b.styles=v`
     :host {
       display: block;
       margin-bottom: var(--space-margin);
@@ -65,7 +65,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
     input[type="checkbox"] {
       transform: scale(1.1);
     }
-  `;let g=w;customElements.define("camping-header",g);const b=class b extends p{render(){return a`
+  `;let u=b;customElements.define("camping-header",u);const y=class y extends h{render(){return o`
       <div class="page-wrapper">
         <main>
           <img
@@ -80,7 +80,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
           </ul>
         </main>
       </div>
-    `}};b.styles=u`
+    `}};y.styles=v`
     :host {
       display: block;
     }
@@ -121,13 +121,14 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
     .link-card:hover {
       background-color: var(--color-box-hover);
     }
-  `;let f=b;customElements.define("home-view",f);var j=Object.defineProperty,L=Object.getOwnPropertyDescriptor,M=(s,e,t,r)=>{for(var i=L(e,t),o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&j(e,t,i),i};class R extends P{constructor(){super("camping:model")}get campsites(){return this.model.campsites??[]}connectedCallback(){super.connectedCallback(),this.dispatchMessage(["campsites/init"])}render(){return a`
+  `;let g=y;customElements.define("home-view",g);var T=Object.defineProperty,A=Object.getOwnPropertyDescriptor,M=(r,e,t,s)=>{for(var i=A(e,t),a=r.length-1,c;a>=0;a--)(c=r[a])&&(i=c(e,t,i)||i);return i&&T(e,t,i),i};class P extends R{constructor(){super("camping:model")}get campsites(){return this.model.campsites??[]}connectedCallback(){super.connectedCallback(),this.dispatchMessage(["campsites/init"])}render(){return o`
       <h2>Campsites</h2>
       <site-campsites .campsites=${this.campsites}></site-campsites>
-    `}}M([m()],R.prototype,"campsites");class A extends p{render(){return a`
-      <site-activities src="/data/activities.json"></site-activities>
-    `}}var D=Object.defineProperty,N=(s,e,t,r)=>{for(var i=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&D(e,t,i),i};const y=class y extends p{constructor(){super(...arguments),this.campsites=[]}render(){return console.log("📦 site-campsites received:",this.campsites),!this.campsites||this.campsites.length===0?a`<p>No campsites to display.</p>`:a`
-      ${this.campsites.map(e=>{const t=e.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");return a`
+    `}}M([l()],P.prototype,"campsites");var D=Object.defineProperty,L=Object.getOwnPropertyDescriptor,N=(r,e,t,s)=>{for(var i=L(e,t),a=r.length-1,c;a>=0;a--)(c=r[a])&&(i=c(e,t,i)||i);return i&&D(e,t,i),i};class S extends R{constructor(){super("camping:model")}get activities(){return this.model.activities??[]}connectedCallback(){super.connectedCallback(),this.dispatchMessage(["activities/init"])}render(){return o`
+      <h2>Activities</h2>
+      <site-activities .activities=${this.activities}></site-activities>
+    `}}N([l()],S.prototype,"activities");var I=Object.defineProperty,U=(r,e,t,s)=>{for(var i=void 0,a=r.length-1,c;a>=0;a--)(c=r[a])&&(i=c(e,t,i)||i);return i&&I(e,t,i),i};const x=class x extends h{constructor(){super(...arguments),this.campsites=[]}render(){return console.log("📦 site-campsites received:",this.campsites),!this.campsites||this.campsites.length===0?o`<p>No campsites to display.</p>`:o`
+      ${this.campsites.map(e=>{const t=e.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");return o`
           <site-campsite
             .id=${t}
             .name=${e.name}
@@ -140,7 +141,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
             <p slot="desc">${e.desc}</p>
           </site-campsite>
         `})}
-    `}};y.styles=u`
+    `}};x.styles=v`
     :host {
       display: block;
     }
@@ -150,7 +151,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
       height: 24px;
       fill: currentColor;
     }
-  `;let v=y;N([h({type:Array})],v.prototype,"campsites");customElements.define("site-campsites",v);var I=Object.defineProperty,d=(s,e,t,r)=>{for(var i=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&I(e,t,i),i};const x=class x extends p{constructor(){super(...arguments),this.showReviewSection=!1,this.showReviewForm=!1,this.reviewText="",this.reviews=[]}firstUpdated(){this.loadReviews()}loadReviews(){const e=localStorage.getItem("reviews");if(e&&this.id){const t=JSON.parse(e);this.reviews=t.filter(r=>r.id===this.id)}}saveReviewToLocalStorage(e){const t=localStorage.getItem("reviews"),r=t?JSON.parse(t):[],i={id:this.id??"",name:this.name,review:e},o=[...r,i];localStorage.setItem("reviews",JSON.stringify(o)),this.reviews=[...this.reviews,i]}toggleReviewSection(){this.showReviewSection=!this.showReviewSection}toggleReviewForm(){this.showReviewForm=!this.showReviewForm}submitReview(){const e=this.reviewText.trim();e&&(this.saveReviewToLocalStorage(e),this.reviewText="",this.showReviewForm=!1)}render(){const e=this.count!==void 0?a`<p class="count">${this.count} campsites</p>`:"";return a`
+  `;let m=x;U([p({type:Array})],m.prototype,"campsites");customElements.define("site-campsites",m);var J=Object.defineProperty,d=(r,e,t,s)=>{for(var i=void 0,a=r.length-1,c;a>=0;a--)(c=r[a])&&(i=c(e,t,i)||i);return i&&J(e,t,i),i};const k=class k extends h{constructor(){super(...arguments),this.showReviewSection=!1,this.showReviewForm=!1,this.reviewText="",this.reviews=[]}firstUpdated(){this.loadReviews()}loadReviews(){const e=localStorage.getItem("reviews");if(e&&this.id){const t=JSON.parse(e);this.reviews=t.filter(s=>s.id===this.id)}}saveReviewToLocalStorage(e){const t=localStorage.getItem("reviews"),s=t?JSON.parse(t):[],i={id:this.id??"",name:this.name,review:e},a=[...s,i];localStorage.setItem("reviews",JSON.stringify(a)),this.reviews=[...this.reviews,i]}toggleReviewSection(){this.showReviewSection=!this.showReviewSection}toggleReviewForm(){this.showReviewForm=!this.showReviewForm}submitReview(){const e=this.reviewText.trim();e&&(this.saveReviewToLocalStorage(e),this.reviewText="",this.showReviewForm=!1)}render(){const e=this.count!==void 0?o`<p class="count">${this.count} campsites</p>`:"";return o`
       <section class="card">
         <div class="header">
           <slot name="icon"></slot>
@@ -161,7 +162,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
         </div>
 
         <div class="body">
-          ${this.image?a`<img class="campsite-img" src=${this.image} alt=${this.name} />`:null}
+          ${this.image?o`<img class="campsite-img" src=${this.image} alt=${this.name} />`:null}
 
           <div class="desc">
             <slot name="desc"></slot>
@@ -172,16 +173,16 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
           ${this.showReviewSection?"Hide Reviews":"See All Reviews"}
         </button>
 
-        ${this.showReviewSection?a`
+        ${this.showReviewSection?o`
               <div class="reviews">
                 <h3>Reviews</h3>
-                ${this.reviews.length>0?this.reviews.map(t=>a`<p class="review">"${t.review}"</p>`):a`<p>No reviews yet.</p>`}
+                ${this.reviews.length>0?this.reviews.map(t=>o`<p class="review">"${t.review}"</p>`):o`<p>No reviews yet.</p>`}
 
                 <button @click=${this.toggleReviewForm}>
                   ${this.showReviewForm?"Cancel":"Add a Review"}
                 </button>
 
-                ${this.showReviewForm?a`
+                ${this.showReviewForm?o`
                       <textarea
                         .value=${this.reviewText}
                         @input=${t=>this.reviewText=t.target.value}
@@ -192,7 +193,7 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
               </div>
             `:null}
       </section>
-    `}};x.styles=u`
+    `}};k.styles=v`
     :host {
       display: block;
       margin: 1rem 0;
@@ -290,14 +291,14 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
     .reviews button:last-of-type {
       background-color: var(--color-accent, #16a34a);
     }
-  `;let c=x;d([h()],c.prototype,"name");d([h({type:Number})],c.prototype,"count");d([h()],c.prototype,"id");d([h()],c.prototype,"image");d([m()],c.prototype,"showReviewSection");d([m()],c.prototype,"showReviewForm");d([m()],c.prototype,"reviewText");d([m()],c.prototype,"reviews");customElements.define("site-campsite",c);var U=Object.defineProperty,S=(s,e,t,r)=>{for(var i=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&U(e,t,i),i};const k=class k extends p{constructor(){super(...arguments),this.src="",this.activities=[]}connectedCallback(){super.connectedCallback(),this.src&&fetch(this.src).then(e=>e.json()).then(e=>{this.activities=e}).catch(e=>{console.error("Failed to load activities:",e)})}render(){return this.activities.length===0?a`<p>Loading activities...</p>`:a`
-      ${this.activities.map(e=>a`
+  `;let n=k;d([p()],n.prototype,"name");d([p({type:Number})],n.prototype,"count");d([p()],n.prototype,"id");d([p()],n.prototype,"image");d([l()],n.prototype,"showReviewSection");d([l()],n.prototype,"showReviewForm");d([l()],n.prototype,"reviewText");d([l()],n.prototype,"reviews");customElements.define("site-campsite",n);var q=Object.defineProperty,V=(r,e,t,s)=>{for(var i=void 0,a=r.length-1,c;a>=0;a--)(c=r[a])&&(i=c(e,t,i)||i);return i&&q(e,t,i),i};const $=class $ extends h{constructor(){super(...arguments),this.activities=[]}render(){return!this.activities||this.activities.length===0?o`<p>No activities available.</p>`:o`
+      ${this.activities.map(e=>o`
           <section class="card">
             <h3>${e.name}</h3>
             <p>${e.desc}</p>
           </section>
         `)}
-    `}};k.styles=u`
+    `}};$.styles=v`
     :host {
       display: block;
     }
@@ -320,4 +321,4 @@ import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h a
       font-family: var(--body-font, sans-serif);
       margin: 0;
     }
-  `;let l=k;S([h()],l.prototype,"src");S([m()],l.prototype,"activities");customElements.define("site-activities",l);const J=[{path:"/app/campsites",view:()=>a`<campsites-view></campsites-view>`},{path:"/app/activities",view:()=>a`<activities-view></activities-view>`},{path:"/app",view:()=>a`<home-view></home-view>`},{path:"/",redirect:"/app"}];_({"mu-auth":$.Provider,"mu-history":C.Provider,"mu-store":class extends z.Provider{constructor(){super(T,F,"camping:auth"),this.provides="camping:model"}},"mu-switch":class extends O.Element{constructor(){super(J,"camping:history","camping:auth")}},"camping-header":g,"home-view":f,"campsites-view":R,"activities-view":A,"site-campsites":v,"site-campsite":c,"site-activities":l});
+  `;let f=$;V([p({type:Array})],f.prototype,"activities");const B=[{path:"/app/campsites",view:()=>o`<campsites-view></campsites-view>`},{path:"/app/activities",view:()=>o`<activities-view></activities-view>`},{path:"/app",view:()=>o`<home-view></home-view>`},{path:"/",redirect:"/app"}];_({"mu-auth":w.Provider,"mu-history":z.Provider,"mu-store":class extends C.Provider{constructor(){super(j,F,"camping:auth"),this.provides="camping:model"}},"mu-switch":class extends O.Element{constructor(){super(B,"camping:history","camping:auth")}},"camping-header":u,"home-view":g,"campsites-view":P,"activities-view":S,"site-campsites":m,"site-campsite":n,"site-activities":f});

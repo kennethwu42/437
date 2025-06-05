@@ -1,28 +1,14 @@
 import { LitElement, html, css } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 
 export class SiteActivitiesElement extends LitElement {
-  @property() src = "";
-  @state() activities: Array<{ name: string; desc: string }> = [];
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.src) {
-      fetch(this.src)
-        .then((res) => res.json())
-        .then((data) => {
-          this.activities = data;
-        })
-        .catch((err) => {
-          console.error("Failed to load activities:", err);
-        });
-    }
-  }
+  @property({ type: Array })
+  activities: Array<{ name: string; desc: string }> = [];
 
   override render() {
-    if (this.activities.length === 0) {
-      return html`<p>Loading activities...</p>`;
-    } 
+    if (!this.activities || this.activities.length === 0) {
+      return html`<p>No activities available.</p>`;
+    }
 
     return html`
       ${this.activities.map(
@@ -61,5 +47,3 @@ export class SiteActivitiesElement extends LitElement {
     }
   `;
 }
-
-customElements.define("site-activities", SiteActivitiesElement);

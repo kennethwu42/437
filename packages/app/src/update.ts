@@ -38,6 +38,27 @@ export default function update(
     return;
   }
 
+  if (message[0] === "activities/init") {
+    console.log("🌱 activities/init received — fetching data");
+
+    fetch("/api/activities", {
+      headers: Auth.headers(user)
+    })
+      .then((res) => res.json())
+      .then((activities) => {
+        console.log("📦 activities fetched — applying to model:", activities);
+        apply((model) => ({
+          ...model,
+          activities
+        }));
+      })
+      .catch((err) => {
+        console.error("❌ Failed to fetch activities:", err);
+      });
+
+    return;
+  }
+
   switch (message[0]) {
     case "campsites/load":
       console.log("✅ Applying campsites to model:", message[1].campsites);
