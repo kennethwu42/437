@@ -3,7 +3,7 @@ import { property, state } from "lit/decorators.js";
 
 export class SiteCampsitesElement extends LitElement {
   @property() src = "";
-  @state() campsites: Array<{ name: string; count: number; desc: string }> = [];
+  @state() campsites: Array<{ name: string; count: number; desc: string; image?: string }> = [];
 
   override connectedCallback() {
     super.connectedCallback();
@@ -25,16 +25,26 @@ export class SiteCampsitesElement extends LitElement {
     }
 
     return html`
-      ${this.campsites.map(
-        (camp) => html`
-          <site-campsite .name=${camp.name} .count=${camp.count}>
+      ${this.campsites.map((camp) => {
+        const id = camp.name
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+
+        return html`
+          <site-campsite
+            .id=${id}
+            .name=${camp.name}
+            .count=${camp.count}
+            .image=${camp.image}
+          >
             <svg slot="icon" class="icon">
               <use href="/icons/icons.svg#campsites"></use>
             </svg>
             <p slot="desc">${camp.desc}</p>
           </site-campsite>
-        `
-      )}
+        `;
+      })}
     `;
   }
 

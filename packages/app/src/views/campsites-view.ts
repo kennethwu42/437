@@ -1,5 +1,5 @@
 import { html, LitElement } from "lit";
-//import "../components/site-campsites";
+
 
 
 export class CampsitesViewElement extends LitElement {
@@ -10,5 +10,3 @@ export class CampsitesViewElement extends LitElement {
     `;
   }
 }
-
-//customElements.define("campsites-view", CampsitesViewElement);

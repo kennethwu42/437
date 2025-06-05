@@ -22,6 +22,17 @@ export class HeaderElement extends LitElement {
       gap: var(--space-small);
     }
 
+    .back-button {
+      align-self: flex-start;
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      text-decoration: underline;
+    }
+
     h1 {
       font-family: var(--heading-font, 'Playfair Display', serif);
       font-size: 1.8rem;
@@ -47,6 +58,8 @@ export class HeaderElement extends LitElement {
     }
   `;
 
+  private isMainPage = false;
+
   override firstUpdated() {
     const toggle = this.renderRoot.querySelector<HTMLInputElement>("#darkModeToggle");
     const saved = localStorage.getItem("dark-mode");
@@ -61,12 +74,18 @@ export class HeaderElement extends LitElement {
       localStorage.setItem("dark-mode", String(isDark));
       document.body.classList.toggle("dark-mode", isDark);
     });
+
+    this.isMainPage = window.location.pathname === "/app";
+    this.requestUpdate();
   }
 
   render() {
     return html`
       <header>
         <div class="page-wrapper">
+          ${!this.isMainPage
+            ? html`<button class="back-button" @click=${() => history.back()}>← Back</button>`
+            : null}
           <h1>Camping and Hiking</h1>
           <p>Explore outdoor adventures in the San Luis Obispo area:</p>
           <label>
