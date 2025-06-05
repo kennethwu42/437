@@ -1,34 +1,42 @@
 [
   {
     "name": "Mission San Luis Obispo de Tolosa",
-    "desc": "A historic Spanish mission offering tours, gardens, and cultural exhibits."
+    "desc": "A historic Spanish mission offering tours, gardens, and cultural exhibits.",
+    "image": "/images/mission.jpg"
   },
   {
     "name": "Madonna Inn",
-    "desc": "A famous inn with uniquely themed rooms and pink decor."
+    "desc": "A famous inn with uniquely themed rooms and pink decor.",
+    "image": "/images/madonna.jpg"
   },
   {
     "name": "San Luis Obispo Children's Museum",
-    "desc": "Interactive exhibits for kids, encouraging learning through play."
+    "desc": "Interactive exhibits for kids, encouraging learning through play.",
+    "image": "/images/children.jpg"
   },
   {
     "name": "Sunset Drive-In",
-    "desc": "A classic drive-in theater showing double features nightly."
+    "desc": "A classic drive-in theater showing double features nightly.",
+    "image": "/images/sunset.jpg"
   },
   {
     "name": "Bishop Peak",
-    "desc": "Popular hiking trail with panoramic views of San Luis Obispo."
+    "desc": "Popular hiking trail with panoramic views of San Luis Obispo.",
+    "image": "/images/bishop.jpeg"
   },
   {
     "name": "Avila Valley Barn",
-    "desc": "A charming farm stand with produce, animals, and baked goods."
+    "desc": "A charming farm stand with produce, animals, and baked goods.",
+    "image": "/images/avila.jpg"
   },
   {
     "name": "Fremont Theater",
-    "desc": "An art deco movie theater hosting film screenings and events."
+    "desc": "An art deco movie theater hosting film screenings and events.",
+    "image": "/images/fremont.jpg"
   },
   {
     "name": "Performing Arts Center San Luis Obispo",
-    "desc": "Venue for concerts, performances, and community events."
+    "desc": "Venue for concerts, performances, and community events.",
+    "image": "/images/pac.webp"
   }
 ]
