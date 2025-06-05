@@ -14,9 +14,6 @@ export class SiteCampsiteElement extends LitElement {
   @property() image?: string;
 
   @state()
-  private showReviewSection: boolean = false;
-
-  @state()
   private showReviewForm: boolean = false;
 
   @state()
@@ -52,10 +49,6 @@ export class SiteCampsiteElement extends LitElement {
     this.reviews = [...this.reviews, newReview];
   }
 
-  toggleReviewSection() {
-    this.showReviewSection = !this.showReviewSection;
-  }
-
   toggleReviewForm() {
     this.showReviewForm = !this.showReviewForm;
   }
@@ -74,56 +67,49 @@ export class SiteCampsiteElement extends LitElement {
       ? html`<p class="count">${this.count} campsites</p>`
       : "";
 
+    const displayedReviews = this.reviews.slice(0, 3);
+
     return html`
       <section class="card">
-        <div class="header">
-          <slot name="icon"></slot>
-          <div>
-            <h2>${this.name}</h2>
-            ${countDisplay}
-          </div>
-        </div>
-
-        <div class="body">
+        <div class="layout">
           ${this.image
             ? html`<img class="campsite-img" src=${this.image} alt=${this.name} />`
             : null}
 
-          <div class="desc">
-            <slot name="desc"></slot>
+          <div class="content">
+            <h2>${this.name}</h2>
+            ${countDisplay}
+            <div class="desc">
+              <slot name="desc"></slot>
+            </div>
+
+            <div class="reviews">
+              <h3>Reviews</h3>
+              ${displayedReviews.length > 0
+                ? displayedReviews.map(r => html`<p class="review">"${r.review}"</p>`)
+                : html`<p>No reviews yet.</p>`}
+
+              ${this.showReviewForm
+                ? html`
+                    <textarea
+                      .value=${this.reviewText}
+                      @input=${(e: Event) =>
+                        (this.reviewText = (e.target as HTMLTextAreaElement).value)}
+                      placeholder="Write your review here..."
+                    ></textarea>
+                    <div class="review-actions">
+                      <button @click=${this.submitReview}>Submit</button>
+                      <button @click=${this.toggleReviewForm} class="cancel">Cancel</button>
+                    </div>
+                  `
+                : html`
+                    <div class="review-actions">
+                      <button @click=${this.toggleReviewForm}>Add a Review</button>
+                    </div>
+                  `}
+            </div>
           </div>
         </div>
-
-        <button @click=${this.toggleReviewSection}>
-          ${this.showReviewSection ? "Hide Reviews" : "See All Reviews"}
-        </button>
-
-        ${this.showReviewSection
-          ? html`
-              <div class="reviews">
-                <h3>Reviews</h3>
-                ${this.reviews.length > 0
-                  ? this.reviews.map(r => html`<p class="review">"${r.review}"</p>`)
-                  : html`<p>No reviews yet.</p>`}
-
-                <button @click=${this.toggleReviewForm}>
-                  ${this.showReviewForm ? "Cancel" : "Add a Review"}
-                </button>
-
-                ${this.showReviewForm
-                  ? html`
-                      <textarea
-                        .value=${this.reviewText}
-                        @input=${(e: Event) =>
-                          (this.reviewText = (e.target as HTMLTextAreaElement).value)}
-                        placeholder="Write your review here..."
-                      ></textarea>
-                      <button @click=${this.submitReview}>Submit Review</button>
-                    `
-                  : null}
-              </div>
-            `
-          : null}
       </section>
     `;
   }
@@ -142,11 +128,24 @@ export class SiteCampsiteElement extends LitElement {
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
-    .header {
+    .layout {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
+      gap: 1rem;
+      flex-direction: row;
+    }
+
+    .campsite-img {
+      width: 280px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     h2 {
@@ -159,57 +158,27 @@ export class SiteCampsiteElement extends LitElement {
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--text-muted, #666);
-      margin-top: 0.15rem;
-    }
-
-    .body {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;  /* 👈 left-align contents */
-      gap: 0.75rem;
-      margin: 1rem 0;
-    }
-
-    .campsite-img {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      object-fit: cover;
-      border-radius: 6px;
-      display: block;
+      margin-bottom: 0.5rem;
     }
 
     .desc {
       font-size: 1rem;
       font-family: var(--body-font, sans-serif);
       color: var(--color-text-default, #333);
-    }
-
-    button {
-      margin-top: 0.75rem;
-      font-size: 0.95rem;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      background-color: var(--color-primary, #2563eb);
-      color: white;
-      border: none;
-      cursor: pointer;
+      margin-bottom: 1rem;
     }
 
     .reviews {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #ccc;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      margin-top: 0.5rem;
     }
 
     .review {
       font-style: italic;
-      padding: 0.25rem;
-      background: #f9f9f9;
+      padding: 0.4rem;
+      margin: 0.2rem 0;
+      background: #f4f4f4;
       border-left: 4px solid #ccc;
+      color: #222;
     }
 
     textarea {
@@ -223,8 +192,25 @@ export class SiteCampsiteElement extends LitElement {
       border-radius: 4px;
     }
 
-    .reviews button:last-of-type {
-      background-color: var(--color-accent, #16a34a);
+    .review-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      background-color: var(--color-primary, #2563eb);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cancel {
+      background-color: var(--color-muted, #aaa);
     }
   `;
 }

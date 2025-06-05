@@ -12,14 +12,14 @@ export class HeaderElement extends LitElement {
       color: var(--color-text-on-dark, white);
       border-radius: var(--radius-default);
       padding: var(--space-padding);
+      border: 2px solid #16a34a;
     }
 
     .page-wrapper {
-      max-width: 1024px;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: var(--space-small);
+      text-align: left;
     }
 
     .back-button {

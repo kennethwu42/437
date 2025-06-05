@@ -7,22 +7,24 @@ export class HomeViewElement extends LitElement {
     }
 
     .page-wrapper {
-      max-width: 1024px;
-      margin: 0 auto;
       padding: 1rem;
+      text-align: left;
     }
 
     .main-image {
       width: 100%;
+      max-width: 600px;
       height: auto;
       border-radius: var(--radius-default);
       margin-bottom: 1rem;
+      display: block;
     }
 
     .link-grid {
       display: grid;
       gap: 1rem;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      max-width: 600px;
       padding: 0;
       list-style: none;
     }

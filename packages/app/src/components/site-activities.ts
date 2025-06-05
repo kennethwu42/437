@@ -15,9 +15,6 @@ export class SiteActivitiesElement extends LitElement {
   private reviews: Record<string, Review[]> = {};
 
   @state()
-  private showReviewSection: Record<string, boolean> = {};
-
-  @state()
   private showReviewForm: Record<string, boolean> = {};
 
   @state()
@@ -44,13 +41,6 @@ export class SiteActivitiesElement extends LitElement {
     this.reviews = updated;
     this.reviewText = { ...this.reviewText, [id]: "" };
     this.showReviewForm = { ...this.showReviewForm, [id]: false };
-  }
-
-  toggleSection(id: string) {
-    this.showReviewSection = {
-      ...this.showReviewSection,
-      [id]: !this.showReviewSection[id]
-    };
   }
 
   toggleForm(id: string) {
@@ -82,43 +72,39 @@ export class SiteActivitiesElement extends LitElement {
 
         return html`
           <section class="card">
-            ${act.image
-              ? html`<img class="activity-img" src="${act.image}" alt="${act.name}" />`
-              : null}
-            <h3>${act.name}</h3>
-            <p>${act.desc}</p>
+            <div class="activity-layout">
+              ${act.image
+                ? html`<img class="activity-img" src="${act.image}" alt="${act.name}" />`
+                : null}
 
-            <button @click=${() => this.toggleSection(id)}>
-              ${this.showReviewSection[id] ? "Hide Reviews" : "See All Reviews"}
-            </button>
+              <div class="content">
+                <h3>${act.name}</h3>
+                <p>${act.desc}</p>
 
-            ${this.showReviewSection[id]
-              ? html`
-                  <div class="reviews">
-                    <h4>Reviews</h4>
-                    ${reviews.length > 0
-                      ? reviews.map((r) => html`<p class="review">"${r.review}"</p>`)
-                      : html`<p>No reviews yet.</p>`}
+                <div class="reviews">
+                  <h4>Reviews</h4>
+                  ${reviews.slice(-3).map((r) => html`<p class="review">"${r.review}"</p>`)}
+                  ${reviews.length === 0 ? html`<p>No reviews yet.</p>` : null}
+                </div>
 
-                    <button @click=${() => this.toggleForm(id)}>
-                      ${this.showReviewForm[id] ? "Cancel" : "Add a Review"}
-                    </button>
+                ${this.showReviewForm[id]
+                  ? html`
+                      <textarea
+                        .value=${this.reviewText[id] || ""}
+                        @input=${(e: Event) => this.handleInput(id, e)}
+                        placeholder="Write your review here..."
+                      ></textarea>
+                      <button class="submit" @click=${() => this.submitReview(id, act.name)}>
+                        Submit Review
+                      </button>
+                    `
+                  : null}
 
-                    ${this.showReviewForm[id]
-                      ? html`
-                          <textarea
-                            .value=${this.reviewText[id] || ""}
-                            @input=${(e: Event) => this.handleInput(id, e)}
-                            placeholder="Write your review here..."
-                          ></textarea>
-                          <button @click=${() => this.submitReview(id, act.name)}>
-                            Submit Review
-                          </button>
-                        `
-                      : null}
-                  </div>
-                `
-              : null}
+                <button class="add" @click=${() => this.toggleForm(id)}>
+                  ${this.showReviewForm[id] ? "Cancel" : "Add a Review"}
+                </button>
+              </div>
+            </div>
           </section>
         `;
       })}
@@ -139,14 +125,22 @@ export class SiteActivitiesElement extends LitElement {
       border-radius: var(--radius-default);
     }
 
+    .activity-layout {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
     .activity-img {
-      width: 100%;
-      max-width: 600px;
+      width: 300px;
       height: auto;
       object-fit: cover;
       border-radius: 6px;
-      display: block;
-      margin-bottom: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .content {
+      flex: 1;
     }
 
     h3 {
@@ -160,31 +154,8 @@ export class SiteActivitiesElement extends LitElement {
       margin: 0 0 0.5rem 0;
     }
 
-    button {
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      background-color: var(--color-primary, #2563eb);
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
     .reviews {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #ccc;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .review {
-      font-style: italic;
-      padding: 0.25rem;
-      background: #f9f9f9;
-      border-left: 4px solid #ccc;
+      margin-top: 0.5rem;
     }
 
     textarea {
@@ -196,10 +167,43 @@ export class SiteActivitiesElement extends LitElement {
       min-height: 60px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      background-color: var(--color-box-background, #fff);
+      color: var(--color-text-default, #000);
     }
 
-    .reviews button:last-of-type {
+    textarea::placeholder {
+      color: var(--color-text-muted, #666); /* or #999 for higher contrast */
+    }
+
+
+    .review {
+      font-style: italic;
+      padding: 0.25rem;
+      background: #f9f9f9;
+      border-left: 4px solid #ccc;
+      color: #222; /* 👈 ensures dark readable text */
+    }
+
+
+
+    button {
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .add {
+      float: right;
+      background-color: var(--color-primary, #2563eb);
+      color: white;
+    }
+
+    .submit {
       background-color: var(--color-accent, #16a34a);
+      color: white;
     }
   `;
 }
