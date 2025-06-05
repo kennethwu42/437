@@ -1,7 +1,7 @@
-import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./state-CWq57S3t.js";const w=class w extends l{constructor(){super(...arguments),this.isMainPage=!1}firstUpdated(){const e=this.renderRoot.querySelector("#darkModeToggle");localStorage.getItem("dark-mode")==="true"&&(document.body.classList.add("dark-mode"),e&&(e.checked=!0)),e==null||e.addEventListener("change",n=>{const i=n.target.checked;localStorage.setItem("dark-mode",String(i)),document.body.classList.toggle("dark-mode",i)}),this.isMainPage=window.location.pathname==="/app",this.requestUpdate()}render(){return t`
+import{a as $,i as p,b as u,x as a,r as m,V as P,n as h,d as _,_ as O,s as z,h as C}from"./state-BJBJ081d.js";const F={};console.log("🛠 update.ts loaded");function T(s,e,t){if(console.log("🛠 Message received in update:",s),e(r=>({...r,user:t})),s[0]==="campsites/init"){console.log("🌱 campsites/init received — fetching data"),fetch("/api/campsites",{headers:$.headers(t)}).then(r=>r.json()).then(r=>{console.log("📦 campsites fetched — applying to model:",r),e(i=>({...i,campsites:r}))}).catch(r=>{console.error("❌ Failed to fetch campsites:",r)});return}switch(s[0]){case"campsites/load":console.log("✅ Applying campsites to model:",s[1].campsites),e(r=>({...r,campsites:s[1].campsites}));break;case"activities/load":console.log("✅ Applying activities to model:",s[1].activities),e(r=>({...r,activities:s[1].activities}));break;default:throw new Error(`Unhandled message type: ${s[0]}`)}}const w=class w extends p{constructor(){super(...arguments),this.isMainPage=!1}firstUpdated(){const e=this.renderRoot.querySelector("#darkModeToggle");localStorage.getItem("dark-mode")==="true"&&(document.body.classList.add("dark-mode"),e&&(e.checked=!0)),e==null||e.addEventListener("change",r=>{const i=r.target.checked;localStorage.setItem("dark-mode",String(i)),document.body.classList.toggle("dark-mode",i)}),this.isMainPage=window.location.pathname==="/app",this.requestUpdate()}render(){return a`
       <header>
         <div class="page-wrapper">
-          ${this.isMainPage?null:t`<button class="back-button" @click=${()=>history.back()}>← Back</button>`}
+          ${this.isMainPage?null:a`<button class="back-button" @click=${()=>history.back()}>← Back</button>`}
           <h1>Camping and Hiking</h1>
           <p>Explore outdoor adventures in the San Luis Obispo area:</p>
           <label>
@@ -65,7 +65,7 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
     input[type="checkbox"] {
       transform: scale(1.1);
     }
-  `;let g=w;customElements.define("camping-header",g);const b=class b extends l{render(){return t`
+  `;let g=w;customElements.define("camping-header",g);const b=class b extends p{render(){return a`
       <div class="page-wrapper">
         <main>
           <img
@@ -121,15 +121,15 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
     .link-card:hover {
       background-color: var(--color-box-hover);
     }
-  `;let f=b;customElements.define("home-view",f);class C extends l{render(){return t`
+  `;let f=b;customElements.define("home-view",f);var j=Object.defineProperty,L=Object.getOwnPropertyDescriptor,M=(s,e,t,r)=>{for(var i=L(e,t),o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&j(e,t,i),i};class R extends P{constructor(){super("camping:model")}get campsites(){return this.model.campsites??[]}connectedCallback(){super.connectedCallback(),this.dispatchMessage(["campsites/init"])}render(){return a`
       <h2>Campsites</h2>
-      <site-campsites src="/data/campsites.json"></site-campsites>
-    `}}class L extends l{render(){return t`
+      <site-campsites .campsites=${this.campsites}></site-campsites>
+    `}}M([m()],R.prototype,"campsites");class A extends p{render(){return a`
       <site-activities src="/data/activities.json"></site-activities>
-    `}}var T=Object.defineProperty,$=(o,e,s,n)=>{for(var i=void 0,r=o.length-1,c;r>=0;r--)(c=o[r])&&(i=c(e,s,i)||i);return i&&T(e,s,i),i};const y=class y extends l{constructor(){super(...arguments),this.src="",this.campsites=[]}connectedCallback(){super.connectedCallback(),this.src&&fetch(this.src).then(e=>e.json()).then(e=>{this.campsites=e}).catch(e=>{console.error("Failed to load campsites:",e)})}render(){return this.campsites.length===0?t`<p>Loading campsites...</p>`:t`
-      ${this.campsites.map(e=>{const s=e.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");return t`
+    `}}var D=Object.defineProperty,N=(s,e,t,r)=>{for(var i=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&D(e,t,i),i};const y=class y extends p{constructor(){super(...arguments),this.campsites=[]}render(){return console.log("📦 site-campsites received:",this.campsites),!this.campsites||this.campsites.length===0?a`<p>No campsites to display.</p>`:a`
+      ${this.campsites.map(e=>{const t=e.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");return a`
           <site-campsite
-            .id=${s}
+            .id=${t}
             .name=${e.name}
             .count=${e.count}
             .image=${e.image}
@@ -150,7 +150,7 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
       height: 24px;
       fill: currentColor;
     }
-  `;let p=y;$([h()],p.prototype,"src");$([v()],p.prototype,"campsites");customElements.define("site-campsites",p);var _=Object.defineProperty,d=(o,e,s,n)=>{for(var i=void 0,r=o.length-1,c;r>=0;r--)(c=o[r])&&(i=c(e,s,i)||i);return i&&_(e,s,i),i};const x=class x extends l{constructor(){super(...arguments),this.showReviewSection=!1,this.showReviewForm=!1,this.reviewText="",this.reviews=[]}firstUpdated(){this.loadReviews()}loadReviews(){const e=localStorage.getItem("reviews");if(e&&this.id){const s=JSON.parse(e);this.reviews=s.filter(n=>n.id===this.id)}}saveReviewToLocalStorage(e){const s=localStorage.getItem("reviews"),n=s?JSON.parse(s):[],i={id:this.id??"",name:this.name,review:e},r=[...n,i];localStorage.setItem("reviews",JSON.stringify(r)),this.reviews=[...this.reviews,i]}toggleReviewSection(){this.showReviewSection=!this.showReviewSection}toggleReviewForm(){this.showReviewForm=!this.showReviewForm}submitReview(){const e=this.reviewText.trim();e&&(this.saveReviewToLocalStorage(e),this.reviewText="",this.showReviewForm=!1)}render(){const e=this.count!==void 0?t`<p class="count">${this.count} campsites</p>`:"";return t`
+  `;let v=y;N([h({type:Array})],v.prototype,"campsites");customElements.define("site-campsites",v);var I=Object.defineProperty,d=(s,e,t,r)=>{for(var i=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&I(e,t,i),i};const x=class x extends p{constructor(){super(...arguments),this.showReviewSection=!1,this.showReviewForm=!1,this.reviewText="",this.reviews=[]}firstUpdated(){this.loadReviews()}loadReviews(){const e=localStorage.getItem("reviews");if(e&&this.id){const t=JSON.parse(e);this.reviews=t.filter(r=>r.id===this.id)}}saveReviewToLocalStorage(e){const t=localStorage.getItem("reviews"),r=t?JSON.parse(t):[],i={id:this.id??"",name:this.name,review:e},o=[...r,i];localStorage.setItem("reviews",JSON.stringify(o)),this.reviews=[...this.reviews,i]}toggleReviewSection(){this.showReviewSection=!this.showReviewSection}toggleReviewForm(){this.showReviewForm=!this.showReviewForm}submitReview(){const e=this.reviewText.trim();e&&(this.saveReviewToLocalStorage(e),this.reviewText="",this.showReviewForm=!1)}render(){const e=this.count!==void 0?a`<p class="count">${this.count} campsites</p>`:"";return a`
       <section class="card">
         <div class="header">
           <slot name="icon"></slot>
@@ -161,7 +161,7 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
         </div>
 
         <div class="body">
-          ${this.image?t`<img class="campsite-img" src=${this.image} alt=${this.name} />`:null}
+          ${this.image?a`<img class="campsite-img" src=${this.image} alt=${this.name} />`:null}
 
           <div class="desc">
             <slot name="desc"></slot>
@@ -172,19 +172,19 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
           ${this.showReviewSection?"Hide Reviews":"See All Reviews"}
         </button>
 
-        ${this.showReviewSection?t`
+        ${this.showReviewSection?a`
               <div class="reviews">
                 <h3>Reviews</h3>
-                ${this.reviews.length>0?this.reviews.map(s=>t`<p class="review">"${s.review}"</p>`):t`<p>No reviews yet.</p>`}
+                ${this.reviews.length>0?this.reviews.map(t=>a`<p class="review">"${t.review}"</p>`):a`<p>No reviews yet.</p>`}
 
                 <button @click=${this.toggleReviewForm}>
                   ${this.showReviewForm?"Cancel":"Add a Review"}
                 </button>
 
-                ${this.showReviewForm?t`
+                ${this.showReviewForm?a`
                       <textarea
                         .value=${this.reviewText}
-                        @input=${s=>this.reviewText=s.target.value}
+                        @input=${t=>this.reviewText=t.target.value}
                         placeholder="Write your review here..."
                       ></textarea>
                       <button @click=${this.submitReview}>Submit Review</button>
@@ -290,8 +290,8 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
     .reviews button:last-of-type {
       background-color: var(--color-accent, #16a34a);
     }
-  `;let a=x;d([h()],a.prototype,"name");d([h({type:Number})],a.prototype,"count");d([h()],a.prototype,"id");d([h()],a.prototype,"image");d([v()],a.prototype,"showReviewSection");d([v()],a.prototype,"showReviewForm");d([v()],a.prototype,"reviewText");d([v()],a.prototype,"reviews");customElements.define("site-campsite",a);var j=Object.defineProperty,R=(o,e,s,n)=>{for(var i=void 0,r=o.length-1,c;r>=0;r--)(c=o[r])&&(i=c(e,s,i)||i);return i&&j(e,s,i),i};const k=class k extends l{constructor(){super(...arguments),this.src="",this.activities=[]}connectedCallback(){super.connectedCallback(),this.src&&fetch(this.src).then(e=>e.json()).then(e=>{this.activities=e}).catch(e=>{console.error("Failed to load activities:",e)})}render(){return this.activities.length===0?t`<p>Loading activities...</p>`:t`
-      ${this.activities.map(e=>t`
+  `;let c=x;d([h()],c.prototype,"name");d([h({type:Number})],c.prototype,"count");d([h()],c.prototype,"id");d([h()],c.prototype,"image");d([m()],c.prototype,"showReviewSection");d([m()],c.prototype,"showReviewForm");d([m()],c.prototype,"reviewText");d([m()],c.prototype,"reviews");customElements.define("site-campsite",c);var U=Object.defineProperty,S=(s,e,t,r)=>{for(var i=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(i=n(e,t,i)||i);return i&&U(e,t,i),i};const k=class k extends p{constructor(){super(...arguments),this.src="",this.activities=[]}connectedCallback(){super.connectedCallback(),this.src&&fetch(this.src).then(e=>e.json()).then(e=>{this.activities=e}).catch(e=>{console.error("Failed to load activities:",e)})}render(){return this.activities.length===0?a`<p>Loading activities...</p>`:a`
+      ${this.activities.map(e=>a`
           <section class="card">
             <h3>${e.name}</h3>
             <p>${e.desc}</p>
@@ -320,4 +320,4 @@ import{i as l,a as u,x as t,n as h,r as v,d as S,_ as P,h as z,b as F}from"./sta
       font-family: var(--body-font, sans-serif);
       margin: 0;
     }
-  `;let m=k;R([h()],m.prototype,"src");R([v()],m.prototype,"activities");customElements.define("site-activities",m);const O=[{path:"/app/campsites",view:()=>t`<campsites-view></campsites-view>`},{path:"/app/activities",view:()=>t`<activities-view></activities-view>`},{path:"/app",view:()=>t`<home-view></home-view>`},{path:"/",redirect:"/app"}];S({"mu-auth":F.Provider,"mu-history":z.Provider,"mu-switch":class extends P.Element{constructor(){super(O,"camping:history","camping:auth")}},"camping-header":g,"home-view":f,"campsites-view":C,"activities-view":L,"site-campsites":p,"site-campsite":a,"site-activities":m});
+  `;let l=k;S([h()],l.prototype,"src");S([m()],l.prototype,"activities");customElements.define("site-activities",l);const J=[{path:"/app/campsites",view:()=>a`<campsites-view></campsites-view>`},{path:"/app/activities",view:()=>a`<activities-view></activities-view>`},{path:"/app",view:()=>a`<home-view></home-view>`},{path:"/",redirect:"/app"}];_({"mu-auth":$.Provider,"mu-history":C.Provider,"mu-store":class extends z.Provider{constructor(){super(T,F,"camping:auth"),this.provides="camping:model"}},"mu-switch":class extends O.Element{constructor(){super(J,"camping:history","camping:auth")}},"camping-header":g,"home-view":f,"campsites-view":R,"activities-view":A,"site-campsites":v,"site-campsite":c,"site-activities":l});

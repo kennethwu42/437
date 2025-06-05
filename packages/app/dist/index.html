@@ -16,17 +16,19 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
-    <script type="module" crossorigin src="/assets/main-9QWxuyzh.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/state-CWq57S3t.js">
+    <script type="module" crossorigin src="/assets/main-Dpy_TB1o.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/state-BJBJ081d.js">
   </head>
 
   <body>
     <mu-history provides="camping:history">
       <mu-auth provides="camping:auth" redirect="/login.html">
-        <article class="page">
-          <camping-header></camping-header>
-          <mu-switch></mu-switch>
-        </article>
+        <mu-store provides="camping:model">
+          <article class="page">
+            <camping-header></camping-header>
+            <mu-switch></mu-switch>
+          </article>
+        </mu-store>
       </mu-auth>
     </mu-history>
 

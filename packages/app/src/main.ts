@@ -2,9 +2,15 @@ import {
   Auth,
   define,
   History,
-  Switch
+  Switch,
+  Store
 } from "@calpoly/mustang";
 import { html } from "lit";
+
+// MVU: Model, Msg, Update
+import { Model, init } from "./model";
+import { Msg } from "./messages";
+import update from "./update";
 
 // Header component
 import { HeaderElement } from "./components/camping-header";
@@ -13,9 +19,13 @@ import { HeaderElement } from "./components/camping-header";
 import { HomeViewElement } from "./views/home-view";
 import { CampsitesViewElement } from "./views/campsites-view";
 import { ActivitiesViewElement } from "./views/activities-view";
-import {SiteCampsitesElement} from "./components/site-campsites";
-import {SiteCampsiteElement} from "./components/site-campsite";
-import {SiteActivitiesElement} from "./components/site-activities";
+
+// Components
+import { SiteCampsitesElement } from "./components/site-campsites";
+import { SiteCampsiteElement } from "./components/site-campsite";
+import { SiteActivitiesElement } from "./components/site-activities";
+
+// App Routes
 const routes = [
   {
     path: "/app/campsites",
@@ -36,13 +46,22 @@ const routes = [
 ];
 
 define({
+  // Mustang providers
   "mu-auth": Auth.Provider,
   "mu-history": History.Provider,
+  "mu-store": class AppStore extends Store.Provider<Model, Msg> {
+    constructor() {
+      super(update, init, "camping:auth");
+      this.provides = "camping:model";
+    }
+  },
   "mu-switch": class AppSwitch extends Switch.Element {
     constructor() {
       super(routes, "camping:history", "camping:auth");
     }
   },
+
+  // App components
   "camping-header": HeaderElement,
   "home-view": HomeViewElement,
   "campsites-view": CampsitesViewElement,

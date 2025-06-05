@@ -16,7 +16,7 @@ const staticDir = process.env.STATIC || "../proto";
 
 // ✅ Middleware to parse JSON and form data
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // ← required for login-form submission
+app.use(express.urlencoded({ extended: true })); 
 
 // ✅ Auth route logging + registration
 app.use("/auth", (req: Request, res: Response, next) => {

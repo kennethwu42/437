@@ -7,4 +7,3 @@ export class ActivitiesViewElement extends LitElement {
     `;
   }
 }
-//customElements.define("activities-view", ActivitiesViewElement);

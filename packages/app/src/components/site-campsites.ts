@@ -1,27 +1,15 @@
 import { LitElement, html, css } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
+import { SiteCampsite } from "server/models";
 
 export class SiteCampsitesElement extends LitElement {
-  @property() src = "";
-  @state() campsites: Array<{ name: string; count: number; desc: string; image?: string }> = [];
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.src) {
-      fetch(this.src)
-        .then((res) => res.json())
-        .then((data) => {
-          this.campsites = data;
-        })
-        .catch((err) => {
-          console.error("Failed to load campsites:", err);
-        });
-    }
-  }
+  @property({ type: Array }) campsites: SiteCampsite[] = [];
 
   override render() {
-    if (this.campsites.length === 0) {
-      return html`<p>Loading campsites...</p>`;
+    console.log("📦 site-campsites received:", this.campsites);
+
+    if (!this.campsites || this.campsites.length === 0) {
+      return html`<p>No campsites to display.</p>`;
     }
 
     return html`

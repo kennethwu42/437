@@ -21,10 +21,12 @@
   <body>
     <mu-history provides="camping:history">
       <mu-auth provides="camping:auth" redirect="/login.html">
-        <article class="page">
-          <camping-header></camping-header>
-          <mu-switch></mu-switch>
-        </article>
+        <mu-store provides="camping:model">
+          <article class="page">
+            <camping-header></camping-header>
+            <mu-switch></mu-switch>
+          </article>
+        </mu-store>
       </mu-auth>
     </mu-history>
 
