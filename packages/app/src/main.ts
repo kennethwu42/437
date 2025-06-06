@@ -19,6 +19,7 @@ import { HeaderElement } from "./components/camping-header";
 import { HomeViewElement } from "./views/home-view";
 import { CampsitesViewElement } from "./views/campsites-view";
 import { ActivitiesViewElement } from "./views/activities-view";
+import { ProfileViewElement } from "./views/profile-view"; // ✅ NEW
 
 // Components
 import { SiteCampsitesElement } from "./components/site-campsites";
@@ -27,6 +28,11 @@ import { SiteActivitiesElement } from "./components/site-activities";
 
 // App Routes
 const routes = [
+  {
+    path: "/app/profile/:userid",
+    view: (params: any) =>
+      html`<profile-view user-id="${params.userid}"></profile-view>`
+  },
   {
     path: "/app/campsites",
     view: () => html`<campsites-view></campsites-view>`
@@ -66,6 +72,7 @@ define({
   "home-view": HomeViewElement,
   "campsites-view": CampsitesViewElement,
   "activities-view": ActivitiesViewElement,
+  "profile-view": ProfileViewElement, // ✅ REGISTERED
   "site-campsites": SiteCampsitesElement,
   "site-campsite": SiteCampsiteElement,
   "site-activities": SiteActivitiesElement

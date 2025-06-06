@@ -4,6 +4,7 @@ import { connect } from "./services/mongo";
 import campsiteRoutes from "./routes/campsites";
 import activityRoutes from "./routes/activities";
 import authRouter, { authenticateUser } from "./routes/auth";
+import profileRoutes from "./routes/profile"; // ✅ NEW
 import fs from "node:fs/promises";
 import path from "path";
 
@@ -15,18 +16,23 @@ const port = process.env.PORT || 3000;
 const staticDir = process.env.STATIC || "../proto";
 
 // ✅ Middleware to parse JSON and form data
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ extended: true, limit: "5mb" }));
 
 // ✅ Auth route logging + registration
-app.use("/auth", (req: Request, res: Response, next) => {
-  console.log(`[AUTH] ${req.method} ${req.url}`, req.body);
-  next();
-}, authRouter);
+app.use(
+  "/auth",
+  (req: Request, res: Response, next) => {
+    console.log(`[AUTH] ${req.method} ${req.url}`, req.body);
+    next();
+  },
+  authRouter
+);
 
 // ✅ Protected API routes
 app.use("/api/campsites", authenticateUser, campsiteRoutes);
 app.use("/api/activities", authenticateUser, activityRoutes);
+app.use("/api/profile", authenticateUser, profileRoutes); // ✅ ADDED
 
 // 🧪 Test route
 app.get("/hello", (_req: Request, res: Response) => {
@@ -48,7 +54,6 @@ app.use("/app", (req: Request, res: Response) => {
 app.get("/", (_req, res) => {
   res.redirect("/app");
 });
-
 
 // ✅ Start server
 app.listen(port, "0.0.0.0", () => {

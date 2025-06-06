@@ -11,12 +11,13 @@ export default function update(
 ) {
   console.log("🛠 Message received in update:", message);
 
-  // Inject user into model
+  // Always update model with current user
   apply((model) => ({
     ...model,
     user
   }));
 
+  // Handle async message types
   if (message[0] === "campsites/init") {
     console.log("🌱 campsites/init received — fetching data");
 
@@ -59,6 +60,51 @@ export default function update(
     return;
   }
 
+  if (message[0] === "profile/select") {
+    console.log("👤 profile/select received");
+
+    loadProfile(message[1], user).then((profile) => {
+      if (profile) {
+        console.log("📦 profile loaded:", profile);
+        apply((model) => ({
+          ...model,
+          profile
+        }));
+      }
+    });
+
+    return;
+  }
+
+  if (message[0] === "profile/save") {
+    console.log("💾 profile/save received");
+
+    const { userid, profile, onSuccess, onFailure } = message[1];
+    fetch(`/api/profile/${userid}`, {
+      method: "PUT",
+      headers: {
+        ...Auth.headers(user),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(profile)
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        else throw new Error("Failed to save profile");
+      })
+      .then((saved) => {
+        apply((model) => ({ ...model, profile: saved }));
+        onSuccess?.();
+      })
+      .catch((err) => {
+        console.error("❌ Failed to save profile:", err);
+        onFailure?.(err);
+      });
+
+    return;
+  }
+
+  // Sync updates
   switch (message[0]) {
     case "campsites/load":
       console.log("✅ Applying campsites to model:", message[1].campsites);
@@ -79,4 +125,20 @@ export default function update(
     default:
       throw new Error(`Unhandled message type: ${message[0]}`);
   }
+}
+
+function loadProfile(
+  payload: { userid: string },
+  user: Auth.User
+): Promise<unknown> {
+  return fetch(`/api/profile/${payload.userid}`, {
+    headers: Auth.headers(user)
+  })
+    .then((res) => (res.status === 200 ? res.json() : undefined))
+    .then((json) => {
+      if (json) {
+        console.log("👤 Loaded profile:", json);
+        return json;
+      }
+    });
 }

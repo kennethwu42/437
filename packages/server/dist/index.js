@@ -27,6 +27,7 @@ var import_mongo = require("./services/mongo");
 var import_campsites = __toESM(require("./routes/campsites"));
 var import_activities = __toESM(require("./routes/activities"));
 var import_auth = __toESM(require("./routes/auth"));
+var import_profile = __toESM(require("./routes/profile"));
 var import_promises = __toESM(require("node:fs/promises"));
 var import_path = __toESM(require("path"));
 import_dotenv.default.config();
@@ -34,14 +35,19 @@ import_dotenv.default.config();
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "../proto";
-app.use(import_express.default.json());
-app.use(import_express.default.urlencoded({ extended: true }));
-app.use("/auth", (req, res, next) => {
-  console.log(`[AUTH] ${req.method} ${req.url}`, req.body);
-  next();
-}, import_auth.default);
+app.use(import_express.default.json({ limit: "5mb" }));
+app.use(import_express.default.urlencoded({ extended: true, limit: "5mb" }));
+app.use(
+  "/auth",
+  (req, res, next) => {
+    console.log(`[AUTH] ${req.method} ${req.url}`, req.body);
+    next();
+  },
+  import_auth.default
+);
 app.use("/api/campsites", import_auth.authenticateUser, import_campsites.default);
 app.use("/api/activities", import_auth.authenticateUser, import_activities.default);
+app.use("/api/profile", import_auth.authenticateUser, import_profile.default);
 app.get("/hello", (_req, res) => {
   res.send("Hello, World");
 });

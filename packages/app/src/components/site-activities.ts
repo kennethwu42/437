@@ -5,6 +5,7 @@ interface Review {
   id: string;
   name?: string;
   review: string;
+  image?: string;
 }
 
 export class SiteActivitiesElement extends LitElement {
@@ -20,6 +21,9 @@ export class SiteActivitiesElement extends LitElement {
   @state()
   private reviewText: Record<string, string> = {};
 
+  @state()
+  private reviewImage: Record<string, string> = {};
+
   override firstUpdated() {
     this.loadReviews();
   }
@@ -31,8 +35,8 @@ export class SiteActivitiesElement extends LitElement {
     }
   }
 
-  saveReview(id: string, name: string, text: string) {
-    const newReview: Review = { id, name, review: text };
+  saveReview(id: string, name: string, text: string, image?: string) {
+    const newReview: Review = { id, name, review: text, image };
     const updated = {
       ...this.reviews,
       [id]: [...(this.reviews[id] || []), newReview]
@@ -40,6 +44,7 @@ export class SiteActivitiesElement extends LitElement {
     localStorage.setItem("activity-reviews", JSON.stringify(updated));
     this.reviews = updated;
     this.reviewText = { ...this.reviewText, [id]: "" };
+    this.reviewImage = { ...this.reviewImage, [id]: "" };
     this.showReviewForm = { ...this.showReviewForm, [id]: false };
   }
 
@@ -57,10 +62,25 @@ export class SiteActivitiesElement extends LitElement {
     };
   }
 
+  handleImage(id: string, e: Event) {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.reviewImage = {
+          ...this.reviewImage,
+          [id]: reader.result as string
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   submitReview(id: string, name: string) {
     const text = this.reviewText[id]?.trim();
+    const image = this.reviewImage[id];
     if (text) {
-      this.saveReview(id, name, text);
+      this.saveReview(id, name, text, image);
     }
   }
 
@@ -83,8 +103,17 @@ export class SiteActivitiesElement extends LitElement {
 
                 <div class="reviews">
                   <h4>Reviews</h4>
-                  ${reviews.slice(-3).map((r) => html`<p class="review">"${r.review}"</p>`)}
                   ${reviews.length === 0 ? html`<p>No reviews yet.</p>` : null}
+                  ${reviews.slice(-3).map(
+                    (r) => html`
+                      <div class="review-block">
+                        <p class="review">"${r.review}"</p>
+                        ${r.image
+                          ? html`<img class="review-image" src="${r.image}" alt="Review image" />`
+                          : null}
+                      </div>
+                    `
+                  )}
                 </div>
 
                 ${this.showReviewForm[id]
@@ -94,6 +123,11 @@ export class SiteActivitiesElement extends LitElement {
                         @input=${(e: Event) => this.handleInput(id, e)}
                         placeholder="Write your review here..."
                       ></textarea>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        @change=${(e: Event) => this.handleImage(id, e)}
+                      />
                       <button class="submit" @click=${() => this.submitReview(id, act.name)}>
                         Submit Review
                       </button>
@@ -158,6 +192,26 @@ export class SiteActivitiesElement extends LitElement {
       margin-top: 0.5rem;
     }
 
+    .review-block {
+      margin-bottom: 0.5rem;
+    }
+
+    .review {
+      font-style: italic;
+      padding: 0.25rem;
+      background: #f9f9f9;
+      border-left: 4px solid #ccc;
+      color: #222;
+    }
+
+    .review-image {
+      margin-top: 0.3rem;
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 4px;
+      display: block;
+    }
+
     textarea {
       width: 100%;
       font-family: sans-serif;
@@ -172,19 +226,12 @@ export class SiteActivitiesElement extends LitElement {
     }
 
     textarea::placeholder {
-      color: var(--color-text-muted, #666); /* or #999 for higher contrast */
+      color: var(--color-text-muted, #666);
     }
 
-
-    .review {
-      font-style: italic;
-      padding: 0.25rem;
-      background: #f9f9f9;
-      border-left: 4px solid #ccc;
-      color: #222; /* 👈 ensures dark readable text */
+    input[type="file"] {
+      margin-top: 0.5rem;
     }
-
-
 
     button {
       font-size: 0.95rem;

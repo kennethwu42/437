@@ -1,1 +1,0 @@
-import{d as o,a}from"./state-BJBJ081d.js";import{L as n}from"./login-form-CBAGB2VO.js";o({"mu-auth":a.Provider,"login-form":n});document.addEventListener("auth:message",e=>{const[t,{redirect:i}]=e.detail;t==="auth/signin"&&(window.location.href=i||"/")});

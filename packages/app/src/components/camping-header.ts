@@ -22,8 +22,13 @@ export class HeaderElement extends LitElement {
       text-align: left;
     }
 
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .back-button {
-      align-self: flex-start;
       background: none;
       border: none;
       color: inherit;
@@ -31,6 +36,62 @@ export class HeaderElement extends LitElement {
       cursor: pointer;
       padding: 0.25rem 0;
       text-decoration: underline;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-button {
+      background: white;
+      color: #263646;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      font-family: var(--body-font, sans-serif);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%; /* directly below the button */
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 0; /* removed the gap */
+    }
+
+
+    .dropdown-content a,
+    .dropdown-content button {
+      color: #263646;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      display: block;
+      background: white;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: 0.9rem;
+      font-family: var(--body-font, sans-serif);
+      cursor: pointer;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content button:hover {
+      background-color: #f3f4f6;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     h1 {
@@ -79,15 +140,38 @@ export class HeaderElement extends LitElement {
     this.requestUpdate();
   }
 
+  private getUsername(): string {
+    return "Alpha"; // Mocked user name
+  }
+
+  private handleSignOut() {
+    this.dispatchEvent(new CustomEvent("auth:message", {
+      bubbles: true,
+      composed: true,
+      detail: ["auth/signout", {}]
+    }));
+  }
+
   render() {
+    const username = this.getUsername();
     return html`
       <header>
         <div class="page-wrapper">
-          ${!this.isMainPage
-            ? html`<button class="back-button" @click=${() => history.back()}>← Back</button>`
-            : null}
+          <div class="header-top">
+            <a class="back-button" href="/app">← Back</a>
+
+            <div class="dropdown">
+              <button class="dropdown-button">Hi, ${username}</button>
+              <div class="dropdown-content">
+                <a href="/app/profile/${username}">Profile</a>
+                <button @click=${this.handleSignOut}>Sign out</button>
+              </div>
+            </div>
+          </div>
+
           <h1>Camping and Hiking</h1>
           <p>Explore outdoor adventures in the San Luis Obispo area:</p>
+
           <label>
             <input id="darkModeToggle" type="checkbox" autocomplete="off" />
             Dark mode
