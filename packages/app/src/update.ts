@@ -79,26 +79,14 @@ export default function update(
   if (message[0] === "profile/save") {
     console.log("💾 profile/save received");
 
-    const { userid, profile, onSuccess, onFailure } = message[1];
-    fetch(`/api/profile/${userid}`, {
-      method: "PUT",
-      headers: {
-        ...Auth.headers(user),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(profile)
-    })
-      .then((res) => {
-        if (res.status === 200) return res.json();
-        else throw new Error("Failed to save profile");
-      })
+    saveProfile(message[1], user)
       .then((saved) => {
         apply((model) => ({ ...model, profile: saved }));
-        onSuccess?.();
+        message[1].onSuccess?.();
       })
       .catch((err) => {
         console.error("❌ Failed to save profile:", err);
-        onFailure?.(err);
+        message[1].onFailure?.(err);
       });
 
     return;
@@ -123,7 +111,8 @@ export default function update(
       break;
 
     default:
-      throw new Error(`Unhandled message type: ${message[0]}`);
+      const unhandled: never = message[0];
+      throw new Error(`Unhandled message type: ${unhandled}`);
   }
 }
 
@@ -141,4 +130,24 @@ function loadProfile(
         return json;
       }
     });
+}
+
+function saveProfile(
+  msg: {
+    userid: string;
+    profile: unknown;
+  },
+  user: Auth.User
+): Promise<unknown> {
+  return fetch(`/api/profile/${msg.userid}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...Auth.headers(user)
+    },
+    body: JSON.stringify(msg.profile)
+  }).then((response: Response) => {
+    if (response.status === 200) return response.json();
+    else throw new Error(`Failed to save profile for ${msg.userid}`);
+  });
 }
